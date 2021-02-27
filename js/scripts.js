@@ -26,11 +26,11 @@ let squirtle = {
 }
 
 let caterpie = {
-    name: 'Caterpie',
-    height: 0.3,
-    weight: 2.9,
-    abilities: [ 'shield-dust', 'run-away' ],
-    types: ['bug']
+    name: 'Ponyta',
+    height: 1,
+    weight: 30,
+    abilities: [ 'flash-fire', 'flame-body', 'run-away' ],
+    types: ['fire']
 }
 
 let pidgey = {
@@ -49,10 +49,108 @@ let pikachu = {
     types: ['electric']
 }
 
-pokemonList = [ bulbasaur, pidgey, pikachu, caterpie, squirtle, charmander]
+pokemonList = [ bulbasaur, pidgey, pikachu, caterpie, squirtle, charmander] // list of Pokemon
 
-
+// For each to print pokemon with type "grass"
+document.write(`<h2>Grass Type</h2>`)
 pokemonList.forEach(pokemon => {
-    document.write(`<p><strong>Pokemon:</strong> ${pokemon.name} <strong>Type</strong>: ${pokemon.abilities}</p>` );
-    ;
+    if(pokemon.types.find(type => type === "grass")){
+        document.write(`
+            <div class="card grass"> 
+                <div class="card__image">
+                    <img src="https://via.placeholder.com/300x200" />
+                </div>
+                <h3>${pokemon.name}</h3>
+                <div class="card__description">
+                    <p>Type: ${pokemon.types}</p>
+                    <p>Height: ${pokemon.height}</p>
+                    <p>Weight ${pokemon.weight}</p>
+                    <p>Abilities: ${pokemon.abilities}</p>
+                </div>
+                <p id="${pokemon.name}"></p>
+            </div>
+        `);
+        // Conditional to print whether the pokemon is heavy or not
+        if(pokemon.weight > 8){
+            document.getElementById(`${pokemon.name}`).innerHTML = "This is a heavy pokemon"
+        }
+    }
+});
+
+// For each to print pokemon with type "flying"
+document.write(`<h2>Flying Type</h2>`)
+pokemonList.forEach(pokemon => {
+    if(pokemon.types.find(type => type === "flying")){
+        document.write(`
+            <div class="card flying"> 
+                <div class="card__image">
+                    <img src="https://via.placeholder.com/300x200" />
+                </div>
+                <h3>${pokemon.name}</h3>
+                <div class="card__description">
+                    <p>Type: ${pokemon.types}</p>
+                    <p>Height: ${pokemon.height}</p>
+                    <p>Weight ${pokemon.weight}</p>
+                    <p>Abilities: ${pokemon.abilities}</p>
+                </div>
+                <p id="${pokemon.name}"></p>
+            </div>
+        `);
+        // Conditional to print whether the pokemon is heavy or not
+        if(pokemon.weight > 8){
+            document.getElementById(`${pokemon.name}`).innerHTML = "This is a heavy pokemon"
+        }
+    }
+});
+
+// For each to print pokemon with type "Fire"
+document.write(`<h2>Fire Type</h2>`)
+pokemonList.forEach(pokemon => {
+    if(pokemon.types.find(type => type === "fire")){
+        document.write(`
+            <div class="card fire"> 
+                <div class="card__image">
+                    <img src="https://via.placeholder.com/300x200" />
+                </div>
+                <h3>${pokemon.name}</h3>
+                <div class="card__description">
+                    <p>Type: ${pokemon.types}</p>
+                    <p>Height: ${pokemon.height}</p>
+                    <p>Weight ${pokemon.weight}</p>
+                    <p>Abilities: ${pokemon.abilities}</p>
+                </div>
+                <p id="${pokemon.name}"></p>
+            </div>
+        `);
+        // Conditional to print whether the pokemon is heavy or not
+        if(pokemon.weight > 8){
+            document.getElementById(`${pokemon.name}`).innerHTML = "This is a heavy pokemon"
+        }
+    }
+});
+
+// For each to print pokemon with the rest of types
+document.write(`<h2>Rest of Types</h2>`)
+pokemonList.forEach(pokemon => {
+    if(!pokemon.types.find(type => type === "fire" || type === "flying" || type === "grass")){
+        document.write(`
+            <div class="card ${pokemon.types}"> 
+                <div class="card__image">
+                    <img src="https://via.placeholder.com/300x200" />
+                </div>
+                <h3>${pokemon.name}</h3>
+                <div class="card__description">
+                    <p>Type: ${pokemon.types}</p>
+                    <p>Height: ${pokemon.height}</p>
+                    <p>Weight ${pokemon.weight}</p>
+                    <p>Abilities: ${pokemon.abilities}</p>
+                </div>
+                <p id="${pokemon.name}"></p>
+            </div>
+        `);
+        // Conditional to print whether the pokemon is heavy or not
+        if(pokemon.weight > 8){
+            document.getElementById(`${pokemon.name}`).innerHTML = "This is a heavy pokemon"
+        }
+    }
 });
