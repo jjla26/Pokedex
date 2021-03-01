@@ -61,7 +61,7 @@ pokemonList.forEach(pokemon => {
         document.write(`
             <div class="card grass"> 
                 <div class="card__image">
-                    <img src="https://via.placeholder.com/300x200" />
+                    <img src="./img/${pokemon.name}.svg" />
                 </div>
                 <h3>${pokemon.name}</h3>
                 <div class="card__description">
@@ -88,7 +88,7 @@ pokemonList.forEach(pokemon => {
         document.write(`
             <div class="card flying"> 
                 <div class="card__image">
-                    <img src="https://via.placeholder.com/300x200" />
+                    <img src="./img/${pokemon.name}.svg" />
                 </div>
                 <h3>${pokemon.name}</h3>
                 <div class="card__description">
@@ -115,7 +115,7 @@ pokemonList.forEach(pokemon => {
         document.write(`
             <div class="card fire"> 
                 <div class="card__image">
-                    <img src="https://via.placeholder.com/300x200" />
+                    <img src="./img/${pokemon.name}.svg" />
                 </div>
                 <h3>${pokemon.name}</h3>
                 <div class="card__description">
@@ -143,7 +143,7 @@ pokemonList.forEach(pokemon => {
         document.write(`
             <div class="card ${pokemon.types}"> 
                 <div class="card__image">
-                    <img src="https://via.placeholder.com/300x200" />
+                    <img src="./img/${pokemon.name}.svg" />
                 </div>
                 <h3>${pokemon.name}</h3>
                 <div class="card__description">
