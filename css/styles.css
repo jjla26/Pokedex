@@ -1,7 +1,14 @@
 body {
-    background-color: #ccc;
+    background-color: #f7f7f7;
     font-family: sans-serif;
 }
+
+/* .card__container {
+    display: flex;
+    justify-content: center;
+    min-width: 25%;
+    flex-wrap: wrap;
+} */
 
 .card {
     display: flex;
@@ -12,6 +19,12 @@ body {
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 0 10px black;
+}
+
+.pokemon__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .card__description {

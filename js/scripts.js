@@ -51,8 +51,11 @@ let pikachu = {
 
 pokemonList = [ bulbasaur, pidgey, pikachu, caterpie, squirtle, charmander] // list of Pokemon
 
+
+// document.write(`<h2>Grass Type</h2>`)
+
+document.write('<div class="pokemon__list">')
 // For each to print pokemon with type "grass"
-document.write(`<h2>Grass Type</h2>`)
 pokemonList.forEach(pokemon => {
     if(pokemon.types.find(type => type === "grass")){
         document.write(`
@@ -77,8 +80,9 @@ pokemonList.forEach(pokemon => {
     }
 });
 
+
+// document.write(`<h2>Flying Type</h2>`)
 // For each to print pokemon with type "flying"
-document.write(`<h2>Flying Type</h2>`)
 pokemonList.forEach(pokemon => {
     if(pokemon.types.find(type => type === "flying")){
         document.write(`
@@ -103,8 +107,9 @@ pokemonList.forEach(pokemon => {
     }
 });
 
+// document.write(`<h2>Fire Type</h2>`)
+
 // For each to print pokemon with type "Fire"
-document.write(`<h2>Fire Type</h2>`)
 pokemonList.forEach(pokemon => {
     if(pokemon.types.find(type => type === "fire")){
         document.write(`
@@ -129,8 +134,10 @@ pokemonList.forEach(pokemon => {
     }
 });
 
+
+// document.write(`<h2>Rest of Types</h2>`)
+
 // For each to print pokemon with the rest of types
-document.write(`<h2>Rest of Types</h2>`)
 pokemonList.forEach(pokemon => {
     if(!pokemon.types.find(type => type === "fire" || type === "flying" || type === "grass")){
         document.write(`
@@ -154,3 +161,6 @@ pokemonList.forEach(pokemon => {
         }
     }
 });
+
+
+document.write('</div>')
