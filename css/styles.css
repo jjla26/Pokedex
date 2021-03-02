@@ -20,18 +20,32 @@ body {
     justify-content: space-around;
 }
 
-.pokemon__button {
+.pokemon__action-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px;
+}
+
+button {
+    border-radius: 5px;
+    height: 50px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#filter-input {
+    height: 50px;
+    border-radius: 1px solid black;
+    border-radius: 5px;
+    width: 200px;
 }
 
 #add-charizard {
     border: 1px solid red;
-    border-radius: 5px;
-    height: 50px;
     background-image: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 255, 0, 0.5));
-    cursor: pointer;
+    width: 50%;
 }
 
 .card__description {
