@@ -61,6 +61,13 @@ const pokemonRepository = (function(){
         }
     }
 
+    // function to filter a pokemon by name 
+    function filterByName(name){
+        const filteredList = pokemonList.filter(pokemon => pokemon.name.toLowerCase() === name.toLowerCase())
+        return filteredList
+    }
+
+    // function to validate the pokemon 
     function pokemonValidate(pokemon) {
         if(typeof(pokemon) === 'object'){
             if(typeof(pokemon['name']) !== 'string'){
@@ -84,7 +91,7 @@ const pokemonRepository = (function(){
     return {
         getAll: getAll,
         add: add,
-
+        filterByName: filterByName
     }
 })()
 
@@ -92,12 +99,16 @@ const pokemonRepository = (function(){
 window.onload = () => {
 
     const pokemonList = pokemonRepository.getAll()
-    const button = document.getElementById('add-charizard')
+    const addCharizardButton = document.getElementById('add-charizard')
+    const restoreButton = document.getElementById('restore')
+    const filterButton = document.getElementById('filter-pokemon')
+    const filterInput = document.getElementById('filter-input')
+    restoreButton.style.display = "none"
 
     /*  Reduce create a HTML template concatening all the cards of the pokemon list
     The reduce inside of the class does the same but with the types (this helps with the styles of the cards)*/
 
-    const pokemonTemplate = () => pokemonList.reduce((acc, pokemon) => 
+    const pokemonTemplate = (pokemonList) => pokemonList.reduce((acc, pokemon) => 
         `${acc}
         <div class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}">
             <div class="card__image">
@@ -114,9 +125,9 @@ window.onload = () => {
         </div>`
         , '')
 
-    document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate()
+    document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
 
-    button.onclick = () => {
+    addCharizardButton.onclick = () => {
         pokemonRepository.add(
             {
                 name: "Charizard", 
@@ -126,7 +137,21 @@ window.onload = () => {
                 types: ["fire"]
             }
         )
-        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate()
+        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
     }
+
+    filterButton.onclick = () => {
+        const filteredList = pokemonRepository.filterByName(filterInput.value)
+        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(filteredList)
+        addCharizardButton.style.display = "none"
+        restoreButton.style.display ="block"
+    }
+
+    restoreButton.onclick = () => {
+        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
+        restoreButton.style.display = "none"
+        addCharizardButton.style.display = "block"
+    }
+
 }
 
