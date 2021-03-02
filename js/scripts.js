@@ -127,6 +127,7 @@ window.onload = () => {
 
     document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
 
+    // This function add charizard when click on addcharizard button
     addCharizardButton.onclick = () => {
         pokemonRepository.add(
             {
@@ -140,6 +141,7 @@ window.onload = () => {
         document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
     }
 
+    // This function filter pokemon by name when click on button filter
     filterButton.onclick = () => {
         const filteredList = pokemonRepository.filterByName(filterInput.value)
         document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(filteredList)
@@ -147,6 +149,7 @@ window.onload = () => {
         restoreButton.style.display ="block"
     }
 
+    // This function restore the pokemon list to the last state
     restoreButton.onclick = () => {
         document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
         restoreButton.style.display = "none"
