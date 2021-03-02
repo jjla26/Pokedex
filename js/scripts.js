@@ -51,9 +51,34 @@ const pokemonRepository = (function(){
     }
 
     // function to add a pokemon to the list 
-    function add(item){
-        pokemonList.push(item)
-        return pokemonList
+    function add(pokemon){
+        const validation = pokemonValidate(pokemon)
+        if(!validation){
+            pokemonList.push(pokemon)
+            return pokemonList
+        }else{
+            alert(validation)
+        }
+    }
+
+    function pokemonValidate(pokemon) {
+        if(typeof(pokemon) === 'object'){
+            if(typeof(pokemon['name']) !== 'string'){
+                return 'Your pokemon should have a name'
+            }else if(typeof(pokemon['height']) !== 'number'){
+                return 'Your pokemon should have a height and it should be a number'
+            }else if(typeof(pokemon['weight']) !== 'number'){
+                return 'Your pokemon should have a weight and it should be a number'
+            }else if(typeof(pokemon['abilities']) !== 'object'){
+                return 'Your pokemon should have abilities and should be an array'
+            }else if(typeof(pokemon['types']) !== 'object'){
+                return 'Your pokemon should have a type and should be an array'
+            }else{
+                return null
+            }
+        }else{
+            return "Ups, this is not a pokemon"
+        }  
     }
 
     return {
@@ -67,26 +92,41 @@ const pokemonRepository = (function(){
 window.onload = () => {
 
     const pokemonList = pokemonRepository.getAll()
+    const button = document.getElementById('add-charizard')
 
-    // Reduce create a HTML template concatening the cards for each pokemon
-    const pokemonTemplate = pokemonList.reduce((acc, pokemon) => 
-    `${acc}
-    <div class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}"> 
-        <div class="card__image">
-            <img src="./img/${pokemon.name}.svg" />
-        </div>
-        <h3>${pokemon.name}</h3>
-        <div class="card__description">
-            <p>Type: ${pokemon.types}</p>
-            <p>Height: ${pokemon.height}</p>
-            <p>Weight ${pokemon.weight}</p>
-            <p>Abilities: ${pokemon.abilities}</p>
-        </div>
-        <p id="${pokemon.name}"></p>
-    </div>`
-    , '')
+    /*  Reduce create a HTML template concatening all the cards of the pokemon list
+    The reduce inside of the class does the same but with the types (this helps with the styles of the cards)*/
 
-    document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate
+    const pokemonTemplate = () => pokemonList.reduce((acc, pokemon) => 
+        `${acc}
+        <div class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}">
+            <div class="card__image">
+                <img src="./img/${pokemon.name}.svg" />
+            </div>
+            <h3>${pokemon.name}</h3>
+            <div class="card__description">
+                <p>Type: ${pokemon.types}</p>
+                <p>Height: ${pokemon.height}</p>
+                <p>Weight ${pokemon.weight}</p>
+                <p>Abilities: ${pokemon.abilities}</p>
+            </div>
+            <p id="${pokemon.name}"></p>
+        </div>`
+        , '')
 
+    document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate()
+
+    button.onclick = () => {
+        pokemonRepository.add(
+            {
+                name: "Charizard", 
+                height:1.7, 
+                weight:90.5, 
+                abilities:["blaze", "solar-power"], 
+                types: ["fire"]
+            }
+        )
+        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate()
+    }
 }
 
