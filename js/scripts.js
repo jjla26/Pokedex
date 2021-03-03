@@ -2,6 +2,7 @@ const pokemonRepository = (function(){
     
     //list of pokemon
     const pokemonList = [ {
+        id: Math.random().toString(36),
         name: 'Bulbasaur',
         img: './img/bulbasaur.svg',
         height: 0.7,
@@ -11,6 +12,7 @@ const pokemonRepository = (function(){
     
     }, 
     {
+        id: Math.random().toString(36),
         name: 'Pidgey',
         img: './img/pidgey.svg',
         height: 0.3,
@@ -19,6 +21,7 @@ const pokemonRepository = (function(){
         types: ['flying', 'normal']
     }, 
     {
+        id: Math.random().toString(36),
         name: 'Pikachu',
         img: './img/pikachu.svg',
         height: 0.4,
@@ -27,6 +30,7 @@ const pokemonRepository = (function(){
         types: ['electric']
     }, 
     {
+        id: Math.random().toString(36),
         name: 'Ponyta',
         img: './img/ponyta.svg',
         height: 1,
@@ -35,6 +39,7 @@ const pokemonRepository = (function(){
         types: ['fire']
     }, 
     {
+        id: Math.random().toString(36),
         name: 'Squirtle',
         img: './img/squirtle.svg',
         height: 0.5,
@@ -43,6 +48,7 @@ const pokemonRepository = (function(){
         types: ['water']
     }, 
     {
+        id: Math.random().toString(36),
         name: 'Charmander',
         img: './img/charmander.svg',
         height: 0.6,
@@ -56,11 +62,21 @@ const pokemonRepository = (function(){
         return pokemonList
     }
 
+    function remove(id){
+        pokemonList.forEach(pokemon => {
+            if(pokemon.id === id){
+                console.log(pokemonList.indexOf(pokemon))
+                pokemonList.splice(pokemonList.indexOf(pokemon),1)
+            }    
+        })
+        return pokemonList 
+    }
+
     // function to add a pokemon to the list 
     function add(pokemon){
         const validation = pokemonValidate(pokemon)
         if(!validation){
-            pokemonList.push(pokemon)
+            pokemonList.push({ id: Math.random().toString(36), ...pokemon })
             return pokemonList
         }else{
             alert(validation)
@@ -98,13 +114,12 @@ const pokemonRepository = (function(){
     return {
         getAll: getAll,
         add: add,
+        remove: remove,
         filterByName: filterByName
     }
 })()
 
-
 window.onload = () => {
-
     const pokemonList = pokemonRepository.getAll()
     const closeModalButton = document.getElementById('modal-close')
     const addPokemonButton = document.getElementById('add-pokemon')
@@ -114,6 +129,7 @@ window.onload = () => {
     const modal = document.getElementById('modal')
     const modalBody = document.getElementsByClassName('modal__body')[0]
     const modalTitle = document.getElementsByClassName('modal__title')[0]
+    const listContainer = document.getElementsByClassName('pokemon__list')[0]
 
     /*  Reduce create a HTML template concatening all the cards of the pokemon list
     The reduce inside of the class does the same but with the types (this helps with the styles of the cards)*/
@@ -121,6 +137,9 @@ window.onload = () => {
     const pokemonTemplate = (pokemonList) => pokemonList.reduce((acc, pokemon) => 
         `${acc}
         <div class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}">
+            <div class="card__delete">
+                <button id="${pokemon.id}" class="card__delete-button">-</button>
+            </div>
             <div class="card__image-container">
                 <img class="card__image" src="${pokemon.img}" />
             </div>
@@ -133,7 +152,7 @@ window.onload = () => {
             </div>
             <p id="${pokemon.name}"></p>
         </div>`
-        , '')
+    , '')
 
     document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
 
@@ -175,6 +194,15 @@ window.onload = () => {
             modal.style.display = 'none'
         }
     }
+
+    listContainer.addEventListener('click', e => {
+        const element = e.target.nodeName
+        if(element === "BUTTON"){
+            pokemonRepository.remove(e.target.id)
+            document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
+        }
+
+    })
 
 }
 
