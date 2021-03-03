@@ -63,6 +63,11 @@ body {
     border: 10px solid rgb(255, 255, 0);
 }
 
+.other {
+    background-image: linear-gradient(135deg, rgba(226, 5, 255, 0.7), rgba(185, 163, 163, 0.5));
+    border: 10px solid rgb(255, 0, 157);
+}
+
 /* styles of the pokemon panel */
 
 .pokemon__list {
@@ -129,6 +134,7 @@ body {
 .action__container {
     display: flex;
     width: 500px;
+    min-width: 200px;
     flex-direction: column;
     align-items: center;
     background-color: #f7f7f7;
@@ -140,5 +146,86 @@ button {
     border-radius: 5px;
     height: 50px;
     cursor: pointer;
+    width: 100%;
+}
+
+/* styles for modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 100px;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Black w/ opacity */
+}
+
+.modal__content {
+    border-radius: 5px;
+    background-color: #fefefe;
+    margin: auto;
+    max-height: 400px;
+    padding: 30px;
+    overflow: auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal__close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal__title {
+    text-align: center;
+}
+
+.modal__close:hover,
+.modal__close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal__body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
+}
+
+.form__pokemon {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+input:active,
+input:focus {
+    outline: none;
+    border-bottom: 1px solid blue;
+}
+
+.input__group {
+    width: 100%;
+    margin: 20px;
+}
+
+.form__pokemon {
+    display: none;
 }
