@@ -47,8 +47,8 @@ body {
 
 .card__delete-button {
     float: right;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     padding: 0;
     color: white;
     position: relative;
@@ -62,7 +62,26 @@ body {
     cursor: pointer;
 }
 
+.card__edit-button {
+    float: right;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    color: black;
+    position: relative;
+    top: -25px;
+    right: -25px;
+    background-color: yellow;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 .card__delete-button:focus,
+.card__edit-button:focus,
+.card__edit-button:active,
 .card__delete-button:active {
     outline: 0;
 }
@@ -260,6 +279,10 @@ input:focus {
 }
 
 .form__pokemon {
+    display: none;
+}
+
+#id {
     display: none;
 }
 
