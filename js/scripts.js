@@ -195,6 +195,15 @@ window.onload = () => {
         }
     }
 
+    filterPokemonForm.onsubmit = e => {
+        e.preventDefault()
+        const name = document.getElementById('name__filter').value
+        const filteredList = pokemonRepository.filterByName(name)
+        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(filteredList)
+        modal.style.display = 'none'
+    }
+
+    // Action for deleting cards
     listContainer.addEventListener('click', e => {
         const element = e.target.nodeName
         if(element === "BUTTON"){
