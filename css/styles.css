@@ -113,11 +113,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .pokemon__section {
     display: flex;
     flex-direction: row;
+    min-height: 100vh;
 }
 
 /* styles of the action sidebar */
@@ -164,7 +166,7 @@ body {
 
 .action__container {
     display: flex;
-    width: 500px;
+    width: 300px;
     min-width: 200px;
     flex-direction: column;
     align-items: center;
@@ -258,5 +260,9 @@ input:focus {
 }
 
 .form__pokemon {
+    display: none;
+}
+
+.form__filter {
     display: none;
 }
