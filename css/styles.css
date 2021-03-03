@@ -41,6 +41,32 @@ body {
     height: 100px;
 }
 
+.card__delete {
+    width: 100%;
+}
+
+.card__delete-button {
+    float: right;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+    color: white;
+    position: relative;
+    top: -25px;
+    right: -25px;
+    background-color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.card__delete-button:focus,
+.card__delete-button:active {
+    outline: 0;
+}
+
 /* Cards colors per type */
 
 .fire {
