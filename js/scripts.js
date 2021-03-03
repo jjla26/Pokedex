@@ -63,11 +63,8 @@ const pokemonRepository = (function(){
     }
 
     function remove(id){
-        pokemonList.forEach(pokemon => {
-            if(pokemon.id === id){
-                pokemonList.splice(pokemonList.indexOf(pokemon),1)
-            }    
-        })
+        const newPokemonList = pokemonList.filter(pokemon => pokemon.id !== id)
+        pokemonList = newPokemonList
         return pokemonList 
     }
 
@@ -94,7 +91,8 @@ const pokemonRepository = (function(){
     function add(pokemon){
         const validation = pokemonValidate(pokemon)
         if(!validation){
-            pokemonList.push({ id: Math.random().toString(36), ...pokemon })
+            const newPokemonList = pokemonList.concat({ id: Math.random().toString(36), ...pokemon })
+            pokemonList = newPokemonList
             return pokemonList
         }else{
             alert(validation)
