@@ -18,8 +18,8 @@
                 </div>
                 <div class="action__list-container">
                     <ul class="action__list">
-                        <li class="action__item">Add Pokemon</li>
-                        <li class="action__item">Filter By Name</li>
+                        <li id="add-pokemon" class="action__item">Add Pokemon</li>
+                        <li id="filter-pokemon" class="action__item">Filter By Name</li>
                     </ul>
                 </div>
             </div>
@@ -29,6 +29,44 @@
                 <div class="pokemon__list"></div>
             </div>
         </div>
+
+        <div id="modal" class="modal">
+            <div class="modal__content">
+                <span id="modal-close" class="modal__close">&times;</span>
+                <h2 class="modal__title"></h2>
+                <div class="modal__body"></div>
+            </div>
+        </div>
+
+        <form class="form__pokemon">
+            <div class="input__group">
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Ex: Charizard" required>
+            </div>
+            <div class="input__group">
+                <label for="img">Image URL</label>
+                <input id="img" type="text" placeholder="Prefer SVG images" required>
+            </div>
+            <div class="input__group">
+                <label for="height">Height</label>
+                <input id="height" type="number" step="any" placeholder="Ex: 0.7" required>
+            </div>
+            <div class="input__group">
+                <label for="weight">Weight</label>
+                <input id="weight" type="number" step="any" placeholder="Ex: 1.2" required>
+            </div>
+            <div class="input__group">
+                <label for="type">Type:</label>
+                <input id="type" type="text" placeholder="Ex: fire, flying" required>
+            </div>
+            <div class="input__group">
+                <label for="abilities">Abilities</label>
+                <input id="abilities" type="text" placeholder="Ex: jump, run" required>
+            </div>
+            <div class="input__group">
+                <button id="submit-form" type="submit">Add New Pokemon</button>
+            </div>
+        </form>
     </main>
 
     <script src="js/scripts.js"></script>
