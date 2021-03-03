@@ -3,6 +3,7 @@ const pokemonRepository = (function(){
     //list of pokemon
     const pokemonList = [ {
         name: 'Bulbasaur',
+        img: './img/bulbasaur.svg',
         height: 0.7,
         weight: 6.9,
         abilities: [ 'chlorophyll', 'overgrow' ],
@@ -11,6 +12,7 @@ const pokemonRepository = (function(){
     }, 
     {
         name: 'Pidgey',
+        img: './img/pidgey.svg',
         height: 0.3,
         weight: 1.8,
         abilities: [ 'keen-eye', 'tangled-feet', 'big-pecks' ],
@@ -18,6 +20,7 @@ const pokemonRepository = (function(){
     }, 
     {
         name: 'Pikachu',
+        img: './img/pikachu.svg',
         height: 0.4,
         weight: 6,
         abilities: [ 'static', 'lightningrod' ],
@@ -25,6 +28,7 @@ const pokemonRepository = (function(){
     }, 
     {
         name: 'Ponyta',
+        img: './img/ponyta.svg',
         height: 1,
         weight: 30,
         abilities: [ 'flash-fire', 'flame-body', 'run-away' ],
@@ -32,6 +36,7 @@ const pokemonRepository = (function(){
     }, 
     {
         name: 'Squirtle',
+        img: './img/squirtle.svg',
         height: 0.5,
         weight: 9,
         abilities: [ 'rain-dish', 'torrent' ],
@@ -39,6 +44,7 @@ const pokemonRepository = (function(){
     }, 
     {
         name: 'Charmander',
+        img: './img/charmander.svg',
         height: 0.6,
         weight: 8.5,
         abilities: [ 'blaze', 'solar-power' ],
@@ -58,6 +64,7 @@ const pokemonRepository = (function(){
             return pokemonList
         }else{
             alert(validation)
+            return false
         }
     }
 
@@ -77,9 +84,9 @@ const pokemonRepository = (function(){
             }else if(typeof(pokemon['weight']) !== 'number'){
                 return 'Your pokemon should have a weight and it should be a number'
             }else if(typeof(pokemon['abilities']) !== 'object'){
-                return 'Your pokemon should have abilities and should be an array'
-            }else if(typeof(pokemon['types']) !== 'object'){
-                return 'Your pokemon should have a type and should be an array'
+                return 'Your pokemon should have abilities (you should separate them by comma)'
+            }else if(pokemon['types'].find(type => (type !== 'fire' && type !== 'flying' && type !== 'grass' && type !== 'electric' && type !== 'water' && type !=='other' ))){
+                return 'Your pokemon types should have one of theses (fire, flying, grass, electric, water, other)'
             }else{
                 return null
             }
@@ -99,11 +106,14 @@ const pokemonRepository = (function(){
 window.onload = () => {
 
     const pokemonList = pokemonRepository.getAll()
-    const addCharizardButton = document.getElementById('add-charizard')
-    const restoreButton = document.getElementById('restore')
-    const filterButton = document.getElementById('filter-pokemon')
-    const filterInput = document.getElementById('filter-input')
-    restoreButton.style.display = "none"
+    const closeModalButton = document.getElementById('modal-close')
+    const addPokemonButton = document.getElementById('add-pokemon')
+    const filterPokemonButton = document.getElementById('filter-pokemon')
+    const addPokemonForm = document.getElementsByClassName('form__pokemon')[0]
+    const filterPokemonForm = document.getElementsByClassName('form__filter')[0]
+    const modal = document.getElementById('modal')
+    const modalBody = document.getElementsByClassName('modal__body')[0]
+    const modalTitle = document.getElementsByClassName('modal__title')[0]
 
     /*  Reduce create a HTML template concatening all the cards of the pokemon list
     The reduce inside of the class does the same but with the types (this helps with the styles of the cards)*/
@@ -111,8 +121,8 @@ window.onload = () => {
     const pokemonTemplate = (pokemonList) => pokemonList.reduce((acc, pokemon) => 
         `${acc}
         <div class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}">
-            <div class="card__image">
-                <img src="./img/${pokemon.name}.svg" />
+            <div class="card__image-container">
+                <img class="card__image" src="${pokemon.img}" />
             </div>
             <h3>${pokemon.name}</h3>
             <div class="card__description">
@@ -127,33 +137,43 @@ window.onload = () => {
 
     document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
 
-    // This function add charizard when click on addcharizard button
-    addCharizardButton.onclick = () => {
-        pokemonRepository.add(
-            {
-                name: "Charizard", 
-                height:1.7, 
-                weight:90.5, 
-                abilities:["blaze", "solar-power"], 
-                types: ["fire"]
-            }
-        )
-        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
+    // Action that opens modal for adding a new pokemon
+    addPokemonButton.onclick = () => {
+        modal.style.display = 'block'
+        modalBody.innerHTML = ''
+        modalTitle.innerHTML = 'Add a new Pokemon'
+        modalBody.appendChild(addPokemonForm)
+        addPokemonForm.style.display = 'block'
     }
 
-    // This function filter pokemon by name when click on button filter
-    filterButton.onclick = () => {
-        const filteredList = pokemonRepository.filterByName(filterInput.value)
-        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(filteredList)
-        addCharizardButton.style.display = "none"
-        restoreButton.style.display ="block"
+    // Action that opens modal for filtering pokemon by name 
+    filterPokemonButton.onclick = () => {
+        modal.style.display = 'block'
+        modalBody.innerHTML = ''
+        modalTitle.innerHTML = 'Filter Pokemon By Name'
+        modalBody.appendChild(filterPokemonForm)
+        filterPokemonForm.style.display = 'block'    
     }
 
-    // This function restore the pokemon list to the last state
-    restoreButton.onclick = () => {
-        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
-        restoreButton.style.display = "none"
-        addCharizardButton.style.display = "block"
+    // Action to close modal
+    closeModalButton.onclick = () => {
+        modal.style.display = 'none'
+    }
+
+    // Action for adding a new pokemon after submitting form
+    addPokemonForm.onsubmit = e => {
+        e.preventDefault()
+        const name = document.getElementById('name').value
+        const img = document.getElementById('img').value
+        const height = parseFloat(document.getElementById('height').value)
+        const weight = parseFloat(document.getElementById('weight').value)
+        const types = document.getElementById('type').value.split(',')
+        const abilities = document.getElementById('abilities').value.split(',')
+        const sended = pokemonRepository.add({name, img, height, weight, types, abilities})
+        if(sended){
+            document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
+            modal.style.display = 'none'
+        }
     }
 
 }
