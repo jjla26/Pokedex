@@ -1,7 +1,8 @@
 body {
-    background-color: #f7f7f7;
     font-family: sans-serif;
 }
+
+/* styles for the pokemon card */
 
 .card {
     display: flex;
@@ -14,40 +15,6 @@ body {
     box-shadow: 0 0 10px black;
 }
 
-.pokemon__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.pokemon__action-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-}
-
-button {
-    border-radius: 5px;
-    height: 50px;
-    cursor: pointer;
-    margin: 10px;
-}
-
-#filter-input {
-    height: 50px;
-    border-radius: 1px solid black;
-    border-radius: 5px;
-    width: 200px;
-}
-
-#add-charizard {
-    border: 1px solid red;
-    background-image: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 255, 0, 0.5));
-    width: 50%;
-}
-
 .card__description {
     width: 100%;
 }
@@ -56,7 +23,7 @@ button {
     margin: 5px;
 }
 
-.card__image {
+.card__image-container {
     width: 300px;
     height: 200px;
     display: flex;
@@ -64,7 +31,7 @@ button {
     align-items: center;
 }
 
-img {
+.card__image {
     width: 100px;
     height: 100px;
 }
@@ -94,4 +61,84 @@ img {
 .electric {
     background-image: linear-gradient(135deg, rgba(255, 255, 5, 0.7), rgba(0, 0, 0, 0.5));
     border: 10px solid rgb(255, 255, 0);
+}
+
+/* styles of the pokemon panel */
+
+.pokemon__list {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.pokemon__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon__section {
+    display: flex;
+    flex-direction: row;
+}
+
+/* styles of the action sidebar */
+
+.logo__image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.action__header {
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action__list-container {
+    width: 100%;
+    display: flex;
+}
+
+.action__list {
+    width: 100%;
+    margin: 20px;
+    padding: 0;
+}
+
+.action__item {
+    cursor: pointer;
+    margin-bottom: 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.action__item:hover {
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+.action__container {
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-right: 1px solid #f7f7f7;
+    box-shadow: 0 0 2px black;
+}
+
+button {
+    border-radius: 5px;
+    height: 50px;
+    cursor: pointer;
+    margin: 10px;
 }
