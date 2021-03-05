@@ -62,10 +62,95 @@ const pokemonRepository = (function(){
         return pokemonList
     }
 
+    // function that removes a pokemon from the list
     function remove(id){
         const newPokemonList = pokemonList.filter(pokemon => pokemon.id !== id)
         pokemonList = newPokemonList
         return pokemonList 
+    }
+
+    // function that prints the list of pokemons 
+    function print(pokemonList){
+        const listContainer = document.querySelector('.pokemon__list')
+        const modal = document.querySelector('.modal')
+        const pokemonForm = document.querySelector('.form__pokemon')
+        const modalTitle = document.querySelector('.modal__title')  
+        
+        // foreach create a list of pokemon cards
+        pokemonList.forEach(pokemon => {
+            const card = document.createElement('div')
+            card.classList.add('card', ...pokemon.types) 
+            
+            const action = document.createElement('div')
+            action.classList.add(`card__action`) 
+            card.appendChild(action)
+
+            const deleteButton = document.createElement('button')
+            deleteButton.classList.add('card__delete-button')
+            deleteButton.innerText = '-'
+            
+            const editButton = document.createElement('button')
+            editButton.classList.add('card__edit-button')
+            editButton.innerText = 'edit'
+            action.appendChild(deleteButton)
+            action.appendChild(editButton)
+
+            const imageContainer = document.createElement('div')
+            imageContainer.classList.add('card__image-container')
+            card.appendChild(imageContainer)
+
+            const image = document.createElement('img')
+            image.classList.add('card__image')
+            image.src = pokemon.img
+            imageContainer.appendChild(image)
+
+            const name = document.createElement('h3')
+            name.innerText = pokemon.name
+            card.appendChild(name)
+
+            const descriptionContainer = document.createElement('div')
+            descriptionContainer.classList.add('card__description')
+            card.appendChild(descriptionContainer)
+
+            const type = document.createElement('p')
+            type.innerText = `Type: ${pokemon.types}`
+            descriptionContainer.appendChild(type)
+
+            const height = document.createElement('p')
+            height.innerText = `Height: ${pokemon.height}`
+            descriptionContainer.appendChild(height)
+            
+            const weight = document.createElement('p')
+            weight.innerText = `Weight: ${pokemon.weight}`
+            descriptionContainer.appendChild(weight)
+
+            const abilities = document.createElement('p')
+            abilities.innerText = `Abilities: ${pokemon.abilities}`
+            descriptionContainer.appendChild(abilities)
+
+            listContainer.appendChild(card)
+
+
+            // addlisteners for delete and edit button
+            deleteButton.addEventListener('click', e => {
+                const card = e.target.parentNode.parentNode
+                card.parentNode.removeChild(card)
+            })
+
+            editButton.addEventListener('click', () => {
+                modal.classList.remove('hidden')
+                pokemonForm.classList.remove('hidden')
+                document.getElementById('id').value = pokemon.id
+                document.getElementById('name').value = pokemon.name
+                document.getElementById('img').value = pokemon.img
+                document.getElementById('height').value = pokemon.height
+                document.getElementById('weight').value = pokemon.weight
+                document.getElementById('type').value = pokemon.types.join()
+                document.getElementById('abilities').value = pokemon.abilities.join()
+                pokemonForm.querySelector('button').innerText = "Edit Pokemon"
+                modalTitle.innerText = 'Edit Pokemon'
+            })            
+        })
     }
 
     // function to edit a pokemon
@@ -102,6 +187,7 @@ const pokemonRepository = (function(){
 
     // function to filter a pokemon by name 
     function filterByName(name){
+        document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'))
         const filteredList = pokemonList.filter(pokemon => pokemon.name.toLowerCase() === name.toLowerCase())
         return filteredList
     }
@@ -132,84 +218,48 @@ const pokemonRepository = (function(){
         add: add,
         edit: edit,
         remove: remove,
+        print: print,
         filterByName: filterByName
     }
 })()
 
 window.onload = () => {
-    const closeModalButton = document.getElementById('modal-close')
-    const addPokemonButton = document.getElementById('add-pokemon')
-    const filterPokemonButton = document.getElementById('filter-pokemon')
-    const pokemonForm = document.getElementsByClassName('form__pokemon')[0]
-    const filterPokemonForm = document.getElementsByClassName('form__filter')[0]
-    const modal = document.getElementById('modal')
-    const modalBody = document.getElementsByClassName('modal__body')[0]
-    const modalTitle = document.getElementsByClassName('modal__title')[0]
-    const listContainer = document.getElementsByClassName('pokemon__list')[0]
+    const pokemonList = pokemonRepository.getAll()
+    const listContainer = document.querySelector('.pokemon__list')
+    const closeModalButton = document.querySelector('.modal__close')
+    const addPokemonButton = document.querySelector('.action__list').firstElementChild
+    const filterPokemonButton = addPokemonButton.nextElementSibling
+    const restoreButton = document.querySelector('.action__list').lastElementChild
+    const pokemonForm = document.querySelector('.form__pokemon')
+    const filterPokemonForm = document.querySelector('.form__filter')
+    const modal = document.querySelector('.modal')
+    const modalBody = document.querySelector('.modal__body')
+    const modalTitle = document.querySelector('.modal__title')
 
-    /*  Reduce create a HTML template concatening all the cards of the pokemon list
-    The reduce inside of the class does the same but with the types (this helps with the styles of the cards)*/
-    const render = (renderList) => {
-        let pokemonList
-        if(renderList){
-            pokemonList = renderList
-        }else{
-            pokemonList = pokemonRepository.getAll()
-        }
-        const pokemonTemplate = (pokemonList) => pokemonList.reduce((acc, pokemon) => 
-            `${acc}
-            <div id="${pokemon.id}" class="card ${pokemon.types.reduce((acc,el) => `${acc} ${el}`,'')}">
-                <div class="card__delete">
-                    <button class="card__delete-button">-</button>
-                    <button class="card__edit-button">edit</button>
-                </div>
-                <div class="card__image-container">
-                    <img class="card__image" src="${pokemon.img}" />
-                </div>
-                <h3>${pokemon.name}</h3>
-                <div class="card__description">
-                    <p>Type: ${pokemon.types}</p>
-                    <p>Height: ${pokemon.height}</p>
-                    <p>Weight ${pokemon.weight}</p>
-                    <p>Abilities: ${pokemon.abilities}</p>
-                </div>
-                <p id="${pokemon.name}"></p>
-            </div>`
-        , '')
-    
-        document.getElementsByClassName('pokemon__list')[0].innerHTML = pokemonTemplate(pokemonList)
-    }
-
-    render()
+    pokemonRepository.print(pokemonList)
 
     // Action that opens modal for adding a new pokemon
-    addPokemonButton.onclick = () => {
-        modal.style.display = 'block'
-        document.getElementById('name').value = ''
-        document.getElementById('img').value = ''
-        document.getElementById('height').value = ''
-        document.getElementById('weight').value = ''
-        document.getElementById('type').value = ''
-        document.getElementById('abilities').value = ''
-        document.getElementById('submit-form').innerHTML =  "Add new Pokemon"
-        modalBody.innerHTML = ''
-        modalTitle.innerHTML = 'Add a new Pokemon'
-        modalBody.appendChild(pokemonForm)
-        pokemonForm.style.display = 'block'
-    }
+    addPokemonButton.addEventListener('click', () => {
+        modal.classList.remove('hidden')
+        pokemonForm.classList.remove('hidden')
+        document.querySelectorAll('input').forEach(el => el.value = '')
+        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
+        modalTitle.innerText = 'Add a new Pokemon'
+    })
 
     // Action that opens modal for filtering pokemon by name 
-    filterPokemonButton.onclick = () => {
-        modal.style.display = 'block'
-        modalBody.innerHTML = ''
-        modalTitle.innerHTML = 'Filter Pokemon By Name'
+    filterPokemonButton.addEventListener('click', () => {
+        modal.classList.remove('hidden')
+        filterPokemonForm.classList.remove('hidden')
+        modalTitle.innerText = 'Filter Pokemon By Name'
         modalBody.appendChild(filterPokemonForm)
-        filterPokemonForm.style.display = 'block'    
-    }
+    })
 
     // Action to close modal
     closeModalButton.onclick = () => {
-        modal.style.display = 'none'
+        modal.classList.add('hidden')
+        pokemonForm.classList.add('hidden')
+        filterPokemonForm.classList.add('hidden')
     }
 
     // Action for adding a new pokemon after submitting form
@@ -222,56 +272,43 @@ window.onload = () => {
         const weight = parseFloat(document.getElementById('weight').value)
         const types = document.getElementById('type').value.split(',')
         const abilities = document.getElementById('abilities').value.split(',')
-        if(document.getElementById('submit-form').innerHTML === "Add new Pokemon"){
+        if(pokemonForm.querySelector('button').innerHTML === "Add a new Pokemon"){
             const sended = pokemonRepository.add({name, img, height, weight, types, abilities})
             if(sended){
-                render()
-                modal.style.display = 'none'
+                listContainer.innerHTML = ''
+                pokemonRepository.print(sended)
+                modal.classList.add('hidden')
+                pokemonForm.classList.add('hidden')
             }
         }else{
             const pokemonListEdited = pokemonRepository.edit(id,{name, img, height, weight, types, abilities})
             if(pokemonListEdited){
-                render()
-                modal.style.display = 'none'
+                listContainer.innerHTML = ''
+                pokemonRepository.print(pokemonListEdited)
+                modal.classList.add('hidden')
+                pokemonForm.classList.add('hidden')
             }
         }
+    }
+
+    restoreButton.onclick = () => {
+        listContainer.innerHTML = ''
+        pokemonRepository.print(pokemonRepository.getAll())
+        restoreButton.classList.add('hidden')
+        filterPokemonButton.classList.remove('hidden')
+
     }
 
     filterPokemonForm.onsubmit = e => {
         e.preventDefault()
         const name = document.getElementById('name__filter').value
-        const filteredList = pokemonRepository.filterByName(name)
-        render(filteredList)
-        modal.style.display = 'none'
+        const filteredPokemon = pokemonRepository.filterByName(name)
+        listContainer.innerHTML = ''
+        pokemonRepository.print(filteredPokemon)
+        filterPokemonButton.classList.add('hidden')
+        restoreButton.classList.remove('hidden')
+        modal.classList.add('hidden')
+        filterPokemonForm.classList.add('hidden')
     }
-
-    // Action for deleting cards and editing
-    listContainer.addEventListener('click', e => {
-        const element = e.target
-        if(element.nodeName === "BUTTON"){
-            if(element.className === "card__delete-button"){
-                pokemonRepository.remove(element.parentNode.parentNode.id)
-                render()
-            }else{
-                const pokemonList = pokemonRepository.getAll()
-                const pokemonSelected = pokemonList.find(pokemon => pokemon.id === element.parentNode.parentNode.id)
-                modal.style.display = 'block'
-                modalBody.innerHTML = ''
-                modalTitle.innerHTML = 'Edit Pokemon'
-                modalBody.appendChild(pokemonForm)
-                pokemonForm.style.display = 'block'
-                document.getElementById('id').value = pokemonSelected.id
-                document.getElementById('name').value = pokemonSelected.name
-                document.getElementById('img').value = pokemonSelected.img
-                document.getElementById('height').value = pokemonSelected.height
-                document.getElementById('weight').value = pokemonSelected.weight
-                document.getElementById('type').value = pokemonSelected.types.join()
-                document.getElementById('abilities').value = pokemonSelected.abilities.join()
-                document.getElementById('submit-form').innerHTML =  "Edit Pokemon"
-            }
-        }
-
-    })
-
 }
 
