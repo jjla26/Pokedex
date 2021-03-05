@@ -41,7 +41,7 @@ body {
     height: 100px;
 }
 
-.card__delete {
+.card__action {
     width: 100%;
 }
 
@@ -204,7 +204,6 @@ button {
 /* styles for modal */
 
 .modal {
-    display: none;
     position: fixed;
     padding-top: 100px;
     z-index: 2;
@@ -278,14 +277,10 @@ input:focus {
     margin: 20px;
 }
 
-.form__pokemon {
+.hidden {
     display: none;
 }
 
 #id {
-    display: none;
-}
-
-.form__filter {
     display: none;
 }
