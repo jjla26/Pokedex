@@ -72,9 +72,6 @@ const pokemonRepository = (function(){
     // function that prints the list of pokemons 
     function print(pokemonList){
         const listContainer = document.querySelector('.pokemon__list')
-        const modal = document.querySelector('.modal')
-        const pokemonForm = document.querySelector('.form__pokemon')
-        const modalTitle = document.querySelector('.modal__title')  
         
         // foreach create a list of pokemon cards
         pokemonList.forEach(pokemon => {
@@ -87,6 +84,7 @@ const pokemonRepository = (function(){
 
             const deleteButton = document.createElement('button')
             deleteButton.classList.add('card__delete-button')
+            deleteButton.setAttribute('id', pokemon.id)
             deleteButton.innerText = '-'
             
             const editButton = document.createElement('button')
@@ -130,27 +128,40 @@ const pokemonRepository = (function(){
 
             listContainer.appendChild(card)
 
-
             // addlisteners for delete and edit button
-            deleteButton.addEventListener('click', e => {
-                const card = e.target.parentNode.parentNode
-                card.parentNode.removeChild(card)
-            })
-
-            editButton.addEventListener('click', () => {
-                modal.classList.remove('hidden')
-                pokemonForm.classList.remove('hidden')
-                document.getElementById('id').value = pokemon.id
-                document.getElementById('name').value = pokemon.name
-                document.getElementById('img').value = pokemon.img
-                document.getElementById('height').value = pokemon.height
-                document.getElementById('weight').value = pokemon.weight
-                document.getElementById('type').value = pokemon.types.join()
-                document.getElementById('abilities').value = pokemon.abilities.join()
-                pokemonForm.querySelector('button').innerText = "Edit Pokemon"
-                modalTitle.innerText = 'Edit Pokemon'
-            })            
+            deleteButtonListener(deleteButton)
+            editButtonListener(editButton, pokemon)
+          
         })
+    }
+
+    //function to add event listener to delete button
+    function deleteButtonListener(element){
+        element.addEventListener('click', e => {
+            remove(e.target.id)
+            const card = e.target.parentNode.parentNode
+            card.parentNode.removeChild(card)
+        })
+    }
+
+    //function to add event listener to edit button
+    function editButtonListener(element, pokemon){
+        const modal = document.querySelector('.modal')
+        const pokemonForm = document.querySelector('.form__pokemon')
+        const modalTitle = document.querySelector('.modal__title')  
+        element.addEventListener('click', () => {
+            modal.classList.remove('hidden')
+            pokemonForm.classList.remove('hidden')
+            document.getElementById('id').value = pokemon.id
+            document.getElementById('name').value = pokemon.name
+            document.getElementById('img').value = pokemon.img
+            document.getElementById('height').value = pokemon.height
+            document.getElementById('weight').value = pokemon.weight
+            document.getElementById('type').value = pokemon.types.join()
+            document.getElementById('abilities').value = pokemon.abilities.join()
+            pokemonForm.querySelector('button').innerText = "Edit Pokemon"
+            modalTitle.innerText = 'Edit Pokemon'
+        })  
     }
 
     // function to edit a pokemon
