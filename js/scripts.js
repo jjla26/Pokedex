@@ -72,7 +72,7 @@ const pokemonRepository = (function(){
     // function that prints the list of pokemons 
     function print(pokemonList){
         const listContainer = document.querySelector('.pokemon__list')
-        
+
         // foreach create a list of pokemon cards
         pokemonList.forEach(pokemon => {
             const card = document.createElement('div')
@@ -168,15 +168,17 @@ const pokemonRepository = (function(){
     function edit(id, pokemonEdited){
         const validation = pokemonValidate(pokemonEdited)
         if(!validation){
+            const newPokemon = {id, ...pokemonEdited}
+            const oldPokemon = pokemonList.find(pokemon => pokemon.id === id )
             const newPokemonList = pokemonList.map(pokemon => {
                 if(pokemon.id === id){
-                    return {id, ...pokemonEdited}
+                    return newPokemon
                 }else{
                     return pokemon
                 }
             })
             pokemonList = newPokemonList
-            return pokemonList
+            return { newPokemon, oldPokemon }
         }else{
             alert(validation)
             return false
@@ -187,9 +189,10 @@ const pokemonRepository = (function(){
     function add(pokemon){
         const validation = pokemonValidate(pokemon)
         if(!validation){
-            const newPokemonList = pokemonList.concat({ id: Math.random().toString(36), ...pokemon })
+            const newPokemon = { id: Math.random().toString(36), ...pokemon }
+            const newPokemonList = pokemonList.concat(newPokemon)
             pokemonList = newPokemonList
-            return pokemonList
+            return newPokemon
         }else{
             alert(validation)
             return false
@@ -286,16 +289,22 @@ window.onload = () => {
         if(pokemonForm.querySelector('button').innerHTML === "Add a new Pokemon"){
             const sended = pokemonRepository.add({name, img, height, weight, types, abilities})
             if(sended){
-                listContainer.innerHTML = ''
-                pokemonRepository.print(sended)
+                pokemonRepository.print([sended])
                 modal.classList.add('hidden')
                 pokemonForm.classList.add('hidden')
             }
         }else{
-            const pokemonListEdited = pokemonRepository.edit(id,{name, img, height, weight, types, abilities})
-            if(pokemonListEdited){
-                listContainer.innerHTML = ''
-                pokemonRepository.print(pokemonListEdited)
+            const pokemonEdited = pokemonRepository.edit(id,{name, img, height, weight, types, abilities})
+            if(pokemonEdited){
+                const oldPokemon = pokemonEdited.oldPokemon
+                const newPokemon = pokemonEdited.newPokemon
+                pokemonRepository.print([newPokemon])
+                const newElement = listContainer.lastElementChild
+                document.querySelectorAll('.card').forEach(element => {
+                    if(element.querySelector('h3').innerText === oldPokemon.name){
+                        listContainer.replaceChild(newElement, element)
+                    }
+                })
                 modal.classList.add('hidden')
                 pokemonForm.classList.add('hidden')
             }
