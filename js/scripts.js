@@ -57,9 +57,38 @@ const pokemonRepository = (function(){
         types: ['fire']
     }]
 
-    // function to get all the pokemon
+    let pokemonList2 = []
+
+    // function to get all the pokemonList1
     function getAll(){
         return pokemonList
+    }
+
+    // function to get all the pokemonList2
+    function getAllPokemonList2(){
+        return pokemonList2
+    }
+
+    // function to load data from https://pokeapi.co/api/v2/pokemon/?limit=150
+    function loadList(){
+        return fetch('https://pokeapi.co/api/v2/pokemon/')
+            .then(response => response.json())
+            .then(response => response.results.forEach(item => {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                }
+                addDynamicList(pokemon)
+            }))
+            .catch(error => console.log(error))
+    }
+    
+    function addDynamicList(pokemon){
+        const validation = nameValidation(pokemon)
+        if(!validation){
+            const newList = pokemonList2.concat(pokemon)
+            pokemonList2 = newList
+        }
     }
 
     // function that removes a pokemon from the list
@@ -67,6 +96,22 @@ const pokemonRepository = (function(){
         const newPokemonList = pokemonList.filter(pokemon => pokemon.id !== id)
         pokemonList = newPokemonList
         return pokemonList 
+    }
+
+    // function that prints the pokemonlist2
+
+    function printList2(pokemonList){
+        const listContainer = document.querySelector('.pokemon__dynamic-list')
+        pokemonList.forEach(pokemon => {
+            const card = document.createElement('div')
+            card.classList.add('pokemon__item')
+
+            const title = document.createElement('h4')
+            title.innerText = pokemon.name
+            card.appendChild(title)
+
+            listContainer.appendChild(card)
+        })
     }
 
     // function that prints the list of pokemons 
@@ -206,6 +251,21 @@ const pokemonRepository = (function(){
         return filteredList
     }
 
+    // function name validation 
+
+    function nameValidation(pokemon){
+        if(typeof(pokemon) === 'object'){
+            if(typeof(pokemon.name) !== 'string'){
+                return 'Your pokemon should have a name'
+            }else{
+                return null
+            }
+        }else{
+            return "Ups, this is not a pokemon"
+        }
+
+    }
+
     // function to validate the pokemon 
     function pokemonValidate(pokemon) {
         if(typeof(pokemon) === 'object'){
@@ -229,6 +289,10 @@ const pokemonRepository = (function(){
 
     return {
         getAll: getAll,
+        loadList: loadList,
+        getAllPokemonList2: getAllPokemonList2,
+        addDynamicList: addDynamicList,
+        printList2: printList2,
         add: add,
         edit: edit,
         remove: remove,
@@ -238,7 +302,6 @@ const pokemonRepository = (function(){
 })()
 
 window.onload = () => {
-    const pokemonList = pokemonRepository.getAll()
     const listContainer = document.querySelector('.pokemon__list')
     const closeModalButton = document.querySelector('.modal__close')
     const addPokemonButton = document.querySelector('.action__list').firstElementChild
@@ -249,8 +312,6 @@ window.onload = () => {
     const modal = document.querySelector('.modal')
     const modalBody = document.querySelector('.modal__body')
     const modalTitle = document.querySelector('.modal__title')
-
-    pokemonRepository.print(pokemonList)
 
     // Action that opens modal for adding a new pokemon
     addPokemonButton.addEventListener('click', () => {
@@ -318,6 +379,8 @@ window.onload = () => {
     const appSelectionButtons = staticAppButton.querySelectorAll('button')
     // Action for Static App button
     staticAppButton.lastElementChild.onclick = () => {
+        const pokemonList = pokemonRepository.getAll()
+        pokemonRepository.print(pokemonList)
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         listContainer.classList.remove('hidden')
         actionList[0].classList.remove('hidden')
@@ -327,12 +390,17 @@ window.onload = () => {
 
     //Action for Dynamic App button
     const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
-    staticAppButton.firstElementChild.onclick = () => {
+    staticAppButton.firstElementChild.onclick = async () => {
+        pokemonRepository
+            .loadList()
+            .then(() => {
+                const pokemonList2 = pokemonRepository.getAllPokemonList2()
+                pokemonRepository.printList2(pokemonList2)
+            })
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         dynamicListContainer.classList.remove('hidden')
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     }
-
 
     restoreButton.onclick = () => {
         listContainer.innerHTML = ''
