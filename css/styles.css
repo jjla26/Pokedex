@@ -127,11 +127,28 @@ body {
     justify-content: space-around;
 }
 
-.pokemon__dynamic-list {
+.pokemon__pagination {
     display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    justify-content: space-around;
+}
+
+.pokemon__dynamic-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pokemon__item {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 0 2px black;
+    width: 300px;
+    cursor: pointer;
+}
+
+.pokemon__item:hover {
+    background-color: #fff;
 }
 
 .pokemon__container {
@@ -193,7 +210,7 @@ body {
 }
 
 .action__item:hover {
-    background-color: #f1f1f1;
+    background-color: #fff;
     width: 100%;
 }
 
@@ -216,7 +233,7 @@ button {
 }
 
 button:hover {
-    background-color: gray;
+    background-color: #fff;
 }
 
 /* styles for modal */
