@@ -127,6 +127,13 @@ body {
     justify-content: space-around;
 }
 
+.pokemon__dynamic-list {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
 .pokemon__container {
     display: flex;
     flex-direction: column;
@@ -139,6 +146,13 @@ body {
     display: flex;
     flex-direction: row;
     min-height: 100vh;
+}
+
+.pokemon__option {
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /* styles of the action sidebar */
@@ -199,6 +213,10 @@ button {
     height: 50px;
     cursor: pointer;
     width: 100%;
+}
+
+button:hover {
+    background-color: gray;
 }
 
 /* styles for modal */

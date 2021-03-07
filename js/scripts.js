@@ -311,6 +311,29 @@ window.onload = () => {
         }
     }
 
+    // Chosing Dynamic or Static App
+    const pokemonContainer = document.querySelector('.pokemon__container')
+    const staticAppButton = pokemonContainer.querySelector('.pokemon__option')
+    const actionList = document.querySelectorAll('.action__item')
+    const appSelectionButtons = staticAppButton.querySelectorAll('button')
+    // Action for Static App button
+    staticAppButton.lastElementChild.onclick = () => {
+        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+        listContainer.classList.remove('hidden')
+        actionList[0].classList.remove('hidden')
+        actionList[1].classList.remove('hidden')
+        appSelectionButtons.forEach(element => element.classList.add('hidden'))
+    }
+
+    //Action for Dynamic App button
+    const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
+    staticAppButton.firstElementChild.onclick = () => {
+        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+        dynamicListContainer.classList.remove('hidden')
+        appSelectionButtons.forEach(element => element.classList.add('hidden'))
+    }
+
+
     restoreButton.onclick = () => {
         listContainer.innerHTML = ''
         pokemonRepository.print(pokemonRepository.getAll())
