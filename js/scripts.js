@@ -58,6 +58,11 @@ const pokemonRepository = (function(){
     }]
 
     let pokemonList2 = []
+    let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=300'
+    let nextPageUrl = ''
+    let offset = 0
+    let step = 300
+    let totalItems
 
     // function to get all the pokemonList1
     function getAll(){
@@ -65,22 +70,73 @@ const pokemonRepository = (function(){
     }
 
     // function to get all the pokemonList2
-    function getAllPokemonList2(){
-        return pokemonList2
+    function getPokemonList2(){
+        return pokemonList2.slice(offset, offset+step)
+    }
+
+    function nextPage(){
+        offset = offset+step
+        const previousButton = document.querySelector('.pokemon__previous-button')
+        previousButton.disabled = false
+        const nextButton = document.querySelector('.pokemon__next-button')
+        const nextList = pokemonList2.slice(offset, offset+step)
+        if(nextList.length === 0){
+            nextButton.disabled = true
+            return nextPageUrl
+        }else{
+            if(totalItems <= offset+step){
+                nextButton.disabled = true
+            }else{
+                nextButton.disabled = false
+            }
+            return null
+        }
+    }
+
+    function previousPage(){
+        offset = offset-step
+        const previousButton = document.querySelector('.pokemon__previous-button')
+        const nextButton = document.querySelector('.pokemon__next-button')
+        nextButton.disabled = false
+        if(offset === 0 ){
+            previousButton.disabled = true
+        }
     }
 
     // function to load data from https://pokeapi.co/api/v2/pokemon/?limit=150
-    function loadList(){
-        return fetch('https://pokeapi.co/api/v2/pokemon/')
+    function loadList(url = mainUrl){
+        document.querySelector('.spinner').classList.remove('hidden')
+        const nextButton = document.querySelector('.pokemon__next-button')
+        const previousButton = document.querySelector('.pokemon__previous-button')
+        return fetch(url)
             .then(response => response.json())
-            .then(response => response.results.forEach(item => {
-                let pokemon = {
-                    name: item.name,
-                    detailsUrl: item.url
+            .then(response => {
+                totalItems = response.count
+                if(response.next){
+                    nextButton.disabled = false
+                    nextPageUrl = response.next
+                }else{
+                    nextButton.disabled = true
                 }
-                addDynamicList(pokemon)
-            }))
-            .catch(error => console.log(error))
+                if(response.previous){
+                    previousButton.disabled = false
+                    previousPageUrl = response.previous
+                }else{
+                    previousButton.disabled = true
+                }
+                response.results.forEach(item => {
+                    let pokemon = {
+                        name: item.name,
+                        detailsUrl: item.url
+                    }
+                    addDynamicList(pokemon)
+                    document.querySelector('.spinner').classList.add('hidden')
+                    document.querySelector('.pokemon__pagination').classList.remove('hidden')
+                })
+            })
+            .catch(error => {
+                document.querySelector('.spinner').classList.remove('hidden')
+            })
     }
     
     function addDynamicList(pokemon){
@@ -290,7 +346,9 @@ const pokemonRepository = (function(){
     return {
         getAll: getAll,
         loadList: loadList,
-        getAllPokemonList2: getAllPokemonList2,
+        nextPage: nextPage,
+        previousPage: previousPage,
+        getPokemonList2: getPokemonList2,
         addDynamicList: addDynamicList,
         printList2: printList2,
         add: add,
@@ -394,12 +452,48 @@ window.onload = () => {
         pokemonRepository
             .loadList()
             .then(() => {
-                const pokemonList2 = pokemonRepository.getAllPokemonList2()
+                const pokemonList2 = pokemonRepository.getPokemonList2()
                 pokemonRepository.printList2(pokemonList2)
             })
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         dynamicListContainer.classList.remove('hidden')
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
+    }
+
+
+    // Pagination next listener
+    let page = 0
+    let offset = 300
+    const nextPageButton = document.querySelector('.pokemon__next-button')
+    nextPageButton.onclick = () => {
+        page += 1
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        const nextPage = pokemonRepository.nextPage()
+        if(nextPage){
+            pokemonRepository
+            .loadList(nextPage)
+            .then(() => {
+                const pokemonList2 = pokemonRepository.getPokemonList2()
+                pokemonRepository.printList2(pokemonList2)
+            })
+        }else{
+            const list = [ ...document.querySelectorAll('.pokemon__item') ]
+            list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
+        }
+    }
+
+    // Pagination previous listener
+    const previousButton = document.querySelector('.pokemon__previous-button')
+    previousButton.onclick = () => {
+        page -= 1
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        const list = [ ...document.querySelectorAll('.pokemon__item') ]
+        list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
+        pokemonRepository.previousPage()
     }
 
     restoreButton.onclick = () => {
