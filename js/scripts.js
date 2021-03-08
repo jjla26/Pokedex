@@ -500,7 +500,7 @@ window.onload = () => {
     }
 
     // Chosing Dynamic or Static App
-    const pokemonContainer = document.querySelector('.pokemon__container')
+    const pokemonContainer = document.querySelector('.pokemon')
     const staticAppButton = pokemonContainer.querySelector('.pokemon__option')
     const actionList = document.querySelectorAll('.action__item')
     const appSelectionButtons = staticAppButton.querySelectorAll('button')
