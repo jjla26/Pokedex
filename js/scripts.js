@@ -126,6 +126,7 @@ const pokemonRepository = (function(){
                 }
                 response.results.forEach(item => {
                     let pokemon = {
+                        id: Math.random().toString(36),
                         name: item.name,
                         detailsUrl: item.url
                     }
