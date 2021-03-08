@@ -133,9 +133,10 @@ li {
 }
 
 .pokemon__dynamic-list {
-    width: 100%;
+    width: 500px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .pokemon__item {
@@ -152,11 +153,16 @@ li {
     background-color: #fff;
 }
 
-.pokemon__container {
+.pokemon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+.pokemon__container {
+    display: flex;
     width: 100%;
 }
 
