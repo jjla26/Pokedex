@@ -7,6 +7,10 @@ body {
     font-family: Pokemon, sans-serif;
 }
 
+li {
+    list-style-type: none;
+}
+
 /* styles for the pokemon card */
 
 .card {
