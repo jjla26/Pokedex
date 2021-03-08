@@ -262,7 +262,6 @@ const pokemonRepository = (function(){
         list.classList.remove('hidden')
         if(pokemon.height){
             list.querySelectorAll('.card').forEach(card => {
-                console.log(card.querySelector('h3').innerText)
                 if(card.querySelector('h3').innerText === pokemon.name){
                     card.classList.toggle('hidden')
                 }else{
@@ -296,7 +295,6 @@ const pokemonRepository = (function(){
                 return response
             })
             .catch(error => {
-                console.log(error)
                 spinner.classList.add('hidden')
             })
     }
