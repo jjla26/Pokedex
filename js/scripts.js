@@ -58,10 +58,10 @@ const pokemonRepository = (function(){
     }]
 
     let pokemonList2 = []
-    let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=300'
+    let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5'
     let nextPageUrl = ''
     let offset = 0
-    let step = 300
+    let step = 5
     let totalItems
 
     // function to get all the pokemonList1
@@ -463,7 +463,7 @@ window.onload = () => {
 
     // Pagination next listener
     let page = 0
-    let offset = 300
+    let offset = 5
     const nextPageButton = document.querySelector('.pokemon__next-button')
     nextPageButton.onclick = () => {
         page += 1
