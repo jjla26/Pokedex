@@ -159,15 +159,19 @@ const pokemonRepository = (function(){
 
     function printList2(pokemonList){
         const listContainer = document.querySelector('.pokemon__dynamic-list')
+        const list = document.createElement('ul')
         pokemonList.forEach(pokemon => {
-            const card = document.createElement('div')
+            const card = document.createElement('li')
             card.classList.add('pokemon__item')
 
             const title = document.createElement('h4')
             title.innerText = pokemon.name
             card.appendChild(title)
+            list.appendChild(card)
 
             listContainer.appendChild(card)
+
+            detailListener(card, pokemon)
         })
     }
 
