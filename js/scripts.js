@@ -250,6 +250,57 @@ const pokemonRepository = (function(){
         })
     }
 
+    //function to add event listener for pokemon detail
+    function detailListener(element, pokemon){
+        element.addEventListener('click', e => {
+            showDetails(pokemon)
+        })
+    }
+
+    function showDetails(pokemon){
+        const list = document.querySelector('.pokemon__list')
+        list.classList.remove('hidden')
+        if(pokemon.height){
+            list.querySelectorAll('.card').forEach(card => {
+                console.log(card.querySelector('h3').innerText)
+                if(card.querySelector('h3').innerText === pokemon.name){
+                    card.classList.toggle('hidden')
+                }else{
+                    card.classList.add('hidden')
+                }
+            })
+        }else{
+            list.querySelectorAll('.card').forEach(card => {
+                card.classList.add('hidden')
+            })
+            loadDetails(pokemon)
+                .then(response => {
+                    pokemon.img = response.sprites.other.dream_world.front_default
+                    pokemon.height = response.height
+                    pokemon.weight = response.weight
+                    pokemon.types = response.types.map(type => type.type.name)
+                    pokemon.abilities = response.abilities.map(ability => ability.ability.name)
+                    print([pokemon])
+                })
+        }
+
+    }
+
+    function loadDetails(pokemon){
+        const spinner = document.querySelector('.pokemon__list').querySelector('.spinner')
+        spinner.classList.remove('hidden')
+        return fetch(pokemon.detailsUrl)
+            .then(response => response.json())
+            .then(response => {
+                spinner.classList.add('hidden')
+                return response
+            })
+            .catch(error => {
+                console.log(error)
+                spinner.classList.add('hidden')
+            })
+    }
+
     //function to add event listener to edit button
     function editButtonListener(element, pokemon){
         const modal = document.querySelector('.modal')
