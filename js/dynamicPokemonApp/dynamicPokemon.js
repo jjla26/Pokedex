@@ -13,6 +13,12 @@ const dynamicPokemonRepository = (function(){
         return pokemonList2.slice(offset, offset+step)
     }
 
+    function renderDynamicCount(){
+        const count = document.querySelector('.pokemon').querySelector('span')
+        count.classList.remove('hidden')
+        count.innerText = `(Total Pokemon: ${totalItems})`
+    }
+
     function nextPage(){
         offset = offset+step
         const previousButton = document.querySelector('.pokemon__previous-button')
@@ -221,5 +227,6 @@ const dynamicPokemonRepository = (function(){
         addDynamicList: addDynamicList,
         printList: printList,
         printCard: printCard,
+        renderDynamicCount: renderDynamicCount,
     }
 })()

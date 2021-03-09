@@ -19,6 +19,7 @@ window.onload = () => {
     appOptions.lastElementChild.onclick = () => {
         const pokemonList = staticPokemonRepository.getAll()
         pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
+        staticPokemonRepository.renderStaticCount()
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         listContainer.classList.remove('hidden')
         actionList[0].classList.remove('hidden')
@@ -34,6 +35,7 @@ window.onload = () => {
             .then(() => {
                 const pokemonList2 = dynamicPokemonRepository.getPokemonList2()
                 dynamicPokemonRepository.printList(pokemonList2)
+                dynamicPokemonRepository.renderDynamicCount()
             })
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         dynamicListContainer.classList.remove('hidden')

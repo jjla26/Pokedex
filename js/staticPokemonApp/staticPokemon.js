@@ -62,10 +62,17 @@ const staticPokemonRepository = (function(){
         return pokemonList
     }
 
+    function renderStaticCount(){
+        const count = document.querySelector('.pokemon').querySelector('span')
+        count.classList.remove('hidden')
+        count.innerText = `(Total Pokemon: ${getAll().length})`
+    }
+
     // function that removes a pokemon from the list
     function remove(id){
         const newPokemonList = pokemonList.filter(pokemon => pokemon.id !== id)
         pokemonList = newPokemonList
+        renderStaticCount()
         return pokemonList 
     }
 
@@ -129,7 +136,6 @@ const staticPokemonRepository = (function(){
         // addlisteners for delete and edit button
         deleteButtonListener(deleteButton)
         editButtonListener(editButton, pokemon)
-          
     }
 
     //function to add event listener to delete button
@@ -202,6 +208,7 @@ const staticPokemonRepository = (function(){
             const newPokemon = { id: Math.random().toString(36), ...pokemon }
             const newPokemonList = pokemonList.concat(newPokemon)
             pokemonList = newPokemonList
+            renderStaticCount()
             return newPokemon
         }else{
             alert(validation)
@@ -216,7 +223,6 @@ const staticPokemonRepository = (function(){
 
     // function to filter a pokemon by name 
     function filterByName(name){
-        console.log(name)
         document.querySelectorAll('.card').forEach(el => {
             if(el.querySelector('h3').innerText.toLowerCase() === name.toLowerCase()){
                 el.classList.remove('hidden')
@@ -255,6 +261,7 @@ const staticPokemonRepository = (function(){
         remove: remove,
         print: print,
         restoreList: restoreList,
-        filterByName: filterByName
+        filterByName: filterByName,
+        renderStaticCount: renderStaticCount,
     }
 })()
