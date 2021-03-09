@@ -18,7 +18,7 @@ window.onload = () => {
     // Action for Static App button
     staticAppButton.lastElementChild.onclick = () => {
         const pokemonList = staticPokemonRepository.getAll()
-        staticPokemonRepository.print(pokemonList)
+        pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         listContainer.classList.remove('hidden')
         actionList[0].classList.remove('hidden')
@@ -77,7 +77,7 @@ window.onload = () => {
         if(pokemonForm.querySelector('button').innerHTML === "Add a new Pokemon"){
             const sended = staticPokemonRepository.add({name, img, height, weight, types, abilities})
             if(sended){
-                staticPokemonRepository.print([sended])
+                staticPokemonRepository.print(sended)
                 modal.classList.add('hidden')
                 pokemonForm.classList.add('hidden')
             }
@@ -86,7 +86,7 @@ window.onload = () => {
             if(pokemonEdited){
                 const oldPokemon = pokemonEdited.oldPokemon
                 const newPokemon = pokemonEdited.newPokemon
-                staticPokemonRepository.print([newPokemon])
+                staticPokemonRepository.print(newPokemon)
                 const newElement = listContainer.lastElementChild
                 document.querySelectorAll('.card').forEach(element => {
                     if(element.querySelector('h3').innerText === oldPokemon.name){
