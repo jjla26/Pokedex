@@ -88,7 +88,7 @@ const dynamicPokemonRepository = (function(){
     }
 
     // function that prints the pokemonlist2
-    function printList2(pokemonList){
+    function printList(pokemonList){
         const listContainer = document.querySelector('.pokemon__dynamic-list')
         const list = document.createElement('ul')
         pokemonList.forEach(pokemon => {
@@ -135,7 +135,7 @@ const dynamicPokemonRepository = (function(){
                     pokemon.weight = response.weight
                     pokemon.types = response.types.map(type => type.type.name)
                     pokemon.abilities = response.abilities.map(ability => ability.ability.name)
-                    staticPokemonRepository.print([pokemon])
+                    printCard(pokemon)
                 })
         }
 
@@ -176,7 +176,7 @@ const dynamicPokemonRepository = (function(){
         previousPage: previousPage,
         getPokemonList2: getPokemonList2,
         addDynamicList: addDynamicList,
-        printList2: printList2,
-        print: print,
+        printList: printList,
+        printCard: printCard,
     }
 })()

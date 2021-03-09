@@ -33,7 +33,7 @@ window.onload = () => {
             .loadList()
             .then(() => {
                 const pokemonList2 = dynamicPokemonRepository.getPokemonList2()
-                dynamicPokemonRepository.printList2(pokemonList2)
+                dynamicPokemonRepository.printList(pokemonList2)
             })
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
         dynamicListContainer.classList.remove('hidden')
@@ -115,7 +115,7 @@ window.onload = () => {
             .loadList(nextPage)
             .then(() => {
                 const pokemonList2 = dynamicPokemonRepository.getPokemonList2()
-                dynamicPokemonRepository.printList2(pokemonList2)
+                dynamicPokemonRepository.printList(pokemonList2)
             })
         }else{
             const list = [ ...document.querySelectorAll('.pokemon__item') ]
