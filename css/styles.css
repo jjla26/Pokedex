@@ -3,8 +3,17 @@
     src: url('../fonts/PokemonSolidNormal-xyWR.ttf');
 }
 
+:root {
+    --primary: #3d7dca;
+    --secondary: #ffcb05;
+    --secondary-darker: #dfb614;
+    --primary-darker: #003a70;
+}
+
 body {
     font-family: Pokemon, sans-serif;
+    background-color: var(--primary);
+    color: var(--secondary);
 }
 
 li {
@@ -141,17 +150,18 @@ li {
 }
 
 .pokemon__item {
-    background-color: #eee;
-    border: 1px solid #ccc;
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
     margin: 10px;
     padding: 10px;
     box-shadow: 0 0 2px black;
     width: 300px;
     cursor: pointer;
+    color: var(--primary);
 }
 
 .pokemon__item:hover {
-    background-color: #fff;
+    background-color: var(--secondary-darker);
 }
 
 .pokemon {
@@ -188,7 +198,7 @@ li {
 }
 
 .action__header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--primary);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -203,21 +213,20 @@ li {
 
 .action__list {
     width: 100%;
-    margin: 20px;
     padding: 0;
 }
 
 .action__item {
     cursor: pointer;
-    margin-bottom: 10px;
     height: 30px;
     display: flex;
     align-items: center;
     list-style: none;
+    padding: 20px;
 }
 
 .action__item:hover {
-    background-color: #fff;
+    background-color: var(--primary);
     width: 100%;
 }
 
@@ -227,19 +236,20 @@ li {
     min-width: 200px;
     flex-direction: column;
     align-items: center;
-    background-color: #f7f7f7;
-    border-right: 1px solid #f7f7f7;
+    background-color: var(--primary-darker);
+    border-right: 1px solid var(--primary);
     box-shadow: 0 0 2px black;
 }
 
 button,
 .button {
-    border: 1px solid black;
+    border: 1px solid var(--primary-darker);
     border-radius: 5px;
     height: 50px;
     cursor: pointer;
     width: 100%;
-    background-color: #f7f7f7;
+    background-color: var(--secondary);
+    color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -248,7 +258,7 @@ button,
 
 button:hover,
 .button:hover {
-    background-color: #fff;
+    background-color: var(--secondary-darker);
 }
 
 /* styles for modal */
@@ -261,22 +271,22 @@ button:hover,
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
 
 .modal__content {
     border-radius: 5px;
-    background-color: #fefefe;
+    background-color: var(--primary);
     margin: auto;
     max-height: 400px;
     padding: 30px;
     overflow: auto;
-    border: 1px solid #888;
+    border: 1px solid var(--primary-darker);
     width: 80%;
 }
 
 .modal__close {
-    color: #aaa;
+    color: var(--secondary);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -288,7 +298,7 @@ button:hover,
 
 .modal__close:hover,
 .modal__close:focus {
-    color: #000;
+    color: var(--secondary-darker);
     text-decoration: none;
     cursor: pointer;
 }
@@ -313,7 +323,9 @@ input {
     width: 100%;
     padding: 5px;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--secondary);
+    background-color: var(--primary);
+    color: var(--secondary);
 }
 
 input:active,
@@ -338,8 +350,8 @@ input:focus {
 /* spinner style */
 
 .spinner {
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #3498db; /* Blue */
+    border: 10px solid var(--secondary); /* Light grey */
+    border-top: 10px solid var(--primary); /* Blue */
     border-radius: 50%;
     width: 50px;
     height: 50px;
