@@ -136,8 +136,7 @@ window.onload = () => {
     }
 
     restoreButton.onclick = () => {
-        listContainer.innerHTML = ''
-        staticPokemonRepository.print(staticPokemonRepository.getAll())
+        staticPokemonRepository.restoreList()
         restoreButton.classList.add('hidden')
         filterPokemonButton.classList.remove('hidden')
 

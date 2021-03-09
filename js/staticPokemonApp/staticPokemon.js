@@ -209,6 +209,11 @@ const staticPokemonRepository = (function(){
         }
     }
 
+    // funcion to restore the list of pokemon
+    function restoreList(){
+        document.querySelectorAll('.card').forEach(el => el.classList.remove('hidden'))
+    }
+
     // function to filter a pokemon by name 
     function filterByName(name){
         console.log(name)
@@ -218,6 +223,7 @@ const staticPokemonRepository = (function(){
             }else{
                 el.classList.add('hidden')
             }
+
         })
     }
 
@@ -248,6 +254,7 @@ const staticPokemonRepository = (function(){
         edit: edit,
         remove: remove,
         print: print,
+        restoreList: restoreList,
         filterByName: filterByName
     }
 })()
