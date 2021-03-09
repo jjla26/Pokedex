@@ -124,6 +124,7 @@ li {
 .pokemon__list {
     display: flex;
     flex-grow: 1;
+    height: 100%;
     flex-wrap: wrap;
     justify-content: space-around;
 }
@@ -156,7 +157,6 @@ li {
 .pokemon {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
 }
