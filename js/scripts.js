@@ -12,11 +12,11 @@ window.onload = () => {
 
     // Chosing Dynamic or Static App
     const pokemonContainer = document.querySelector('.pokemon')
-    const staticAppButton = pokemonContainer.querySelector('.pokemon__option')
+    const appOptions = pokemonContainer.querySelector('.pokemon__option')
     const actionList = document.querySelectorAll('.action__item')
-    const appSelectionButtons = staticAppButton.querySelectorAll('button')
+    const appSelectionButtons = appOptions.querySelectorAll('button')
     // Action for Static App button
-    staticAppButton.lastElementChild.onclick = () => {
+    appOptions.lastElementChild.onclick = () => {
         const pokemonList = staticPokemonRepository.getAll()
         pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
@@ -28,7 +28,7 @@ window.onload = () => {
 
     //Action for Dynamic App button
     const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
-    staticAppButton.firstElementChild.onclick = async () => {
+    appOptions.firstElementChild.onclick = async () => {
         dynamicPokemonRepository
             .loadList()
             .then(() => {
