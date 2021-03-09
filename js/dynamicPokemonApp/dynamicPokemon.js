@@ -87,6 +87,49 @@ const dynamicPokemonRepository = (function(){
         }
     }
 
+    // function that prints the list of pokemons 
+    function printCard(pokemon){
+        const listContainer = document.querySelector('.pokemon__list')
+
+        const card = document.createElement('div')
+        card.classList.add('card', ...pokemon.types) 
+
+        const imageContainer = document.createElement('div')
+        imageContainer.classList.add('card__image-container')
+        card.appendChild(imageContainer)
+
+        const image = document.createElement('img')
+        image.classList.add('card__image')
+        image.src = pokemon.img
+        imageContainer.appendChild(image)
+
+        const name = document.createElement('h3')
+        name.innerText = pokemon.name
+        card.appendChild(name)
+
+        const descriptionContainer = document.createElement('div')
+        descriptionContainer.classList.add('card__description')
+        card.appendChild(descriptionContainer)
+
+        const type = document.createElement('p')
+        type.innerText = `Type: ${pokemon.types}`
+        descriptionContainer.appendChild(type)
+
+        const height = document.createElement('p')
+        height.innerText = `Height: ${pokemon.height}`
+        descriptionContainer.appendChild(height)
+        
+        const weight = document.createElement('p')
+        weight.innerText = `Weight: ${pokemon.weight}`
+        descriptionContainer.appendChild(weight)
+
+        const abilities = document.createElement('p')
+        abilities.innerText = `Abilities: ${pokemon.abilities}`
+        descriptionContainer.appendChild(abilities)
+
+        listContainer.appendChild(card)          
+    }
+
     // function that prints the pokemonlist2
     function printList(pokemonList){
         const listContainer = document.querySelector('.pokemon__dynamic-list')
