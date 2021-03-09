@@ -146,9 +146,7 @@ window.onload = () => {
     filterPokemonForm.onsubmit = e => {
         e.preventDefault()
         const name = document.getElementById('name__filter').value
-        const filteredPokemon = staticPokemonRepository.filterByName(name)
-        listContainer.innerHTML = ''
-        staticPokemonRepository.print(filteredPokemon)
+        staticPokemonRepository.filterByName(name)
         filterPokemonButton.classList.add('hidden')
         restoreButton.classList.remove('hidden')
         modal.classList.add('hidden')

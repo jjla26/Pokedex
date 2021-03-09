@@ -211,9 +211,14 @@ const staticPokemonRepository = (function(){
 
     // function to filter a pokemon by name 
     function filterByName(name){
-        document.querySelectorAll('.card').forEach(el => el.classList.add('hidden'))
-        const filteredList = pokemonList.filter(pokemon => pokemon.name.toLowerCase() === name.toLowerCase())
-        return filteredList
+        console.log(name)
+        document.querySelectorAll('.card').forEach(el => {
+            if(el.querySelector('h3').innerText.toLowerCase() === name.toLowerCase()){
+                el.classList.remove('hidden')
+            }else{
+                el.classList.add('hidden')
+            }
+        })
     }
 
     // function to validate the pokemon 
