@@ -1,15 +1,15 @@
 window.onload = () => {
     const listContainer = document.querySelector('.pokemon__list')
-    const addPokemonButton = document.querySelector('.action__list').firstElementChild
+    const addPokemonButton = document.querySelector('.sidebar__list').firstElementChild
     const filterPokemonButton = addPokemonButton.nextElementSibling
-    const restoreButton = document.querySelector('.action__list').lastElementChild
+    const restoreButton = document.querySelector('.sidebar__list').lastElementChild
     const pokemonForm = document.querySelector('.form__pokemon')
     const filterPokemonForm = document.querySelector('.form__filter')
 
     // Chosing Dynamic or Static App
     const pokemonContainer = document.querySelector('.pokemon')
     const appOptions = pokemonContainer.querySelector('.pokemon__option')
-    const actionList = document.querySelectorAll('.action__item')
+    const actionList = document.querySelectorAll('.sidebar__item')
     const appSelectionButtons = appOptions.querySelectorAll('button')
     // Action for Static App button
     appOptions.lastElementChild.onclick = () => {

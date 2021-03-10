@@ -190,15 +190,15 @@ li {
     align-items: center;
 }
 
-/* styles of the action sidebar */
+/* styles of the sidebar sidebar */
 
-.logo__image {
+.sidebar__image {
     width: 100px;
     height: 100px;
     margin-bottom: 20px;
 }
 
-.action__header {
+.sidebar__header {
     border-bottom: 1px solid var(--primary);
     width: 100%;
     display: flex;
@@ -207,17 +207,17 @@ li {
     align-items: center;
 }
 
-.action__list-container {
+.sidebar__list-container {
     width: 100%;
     display: flex;
 }
 
-.action__list {
+.sidebar__list {
     width: 100%;
     padding: 0;
 }
 
-.action__item {
+.sidebar__item {
     cursor: pointer;
     height: 30px;
     display: flex;
@@ -226,15 +226,14 @@ li {
     padding: 20px;
 }
 
-.action__item:hover {
+.sidebar__item:hover {
     background-color: var(--primary);
     width: 100%;
 }
 
-.action__container {
+.sidebar__container {
     display: flex;
     width: 300px;
-    min-width: 200px;
     flex-direction: column;
     align-items: center;
     background-color: var(--primary-darker);
@@ -273,6 +272,7 @@ button:hover,
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    overflow: scroll;
 }
 
 .modal__content {
