@@ -88,12 +88,12 @@ const staticPokemonRepository = (function(){
         card.appendChild(action)
 
         const deleteButton = document.createElement('button')
-        deleteButton.classList.add('card__delete-button')
+        deleteButton.classList.add('delete-btn', 'action__button')
         deleteButton.setAttribute('id', pokemon.id)
         deleteButton.innerText = '-'
         
         const editButton = document.createElement('button')
-        editButton.classList.add('card__edit-button')
+        editButton.classList.add('edit-btn', 'action__button')
         editButton.innerText = 'edit'
         action.appendChild(deleteButton)
         action.appendChild(editButton)

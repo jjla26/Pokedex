@@ -61,38 +61,38 @@ li {
     width: 100%;
 }
 
-.card__delete-button {
+.action__button {
     float: right;
     height: 40px;
     width: 40px;
     padding: 0;
     color: white;
     position: relative;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+}
+
+.delete-btn {
     top: -25px;
     right: -25px;
     background-color: red;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
 }
 
-.card__edit-button {
-    float: right;
-    height: 40px;
-    width: 40px;
-    padding: 0;
-    color: black;
-    position: relative;
+.add-btn {
+    top: -5px;
+    left: 75px;
+    background-color: green;
+}
+
+.edit-btn {
     top: -25px;
     right: -25px;
     background-color: yellow;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+    color: black
 }
 
 .card__delete-button:focus,
@@ -141,6 +141,23 @@ li {
 
 .content__pagination {
     display: flex;
+}
+
+.content__header-container {
+    display: flex;
+    width: 100%;
+}
+
+.content__header {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content__header button {
+    display: none;
+    padding: 0;
 }
 
 .pokemon__dynamic-list {
@@ -380,4 +397,16 @@ input:focus {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* small devices styles */
+
+@media only screen and (max-width: 768px) {
+    .sidebar__container {
+        display: none;
+    }
+
+    .content__header button {
+        display: flex;
+    }
 }
