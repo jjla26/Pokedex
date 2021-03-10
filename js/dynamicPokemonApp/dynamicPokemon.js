@@ -21,9 +21,9 @@ const dynamicPokemonRepository = (function(){
 
     function nextPage(){
         offset = offset+step
-        const previousButton = document.querySelector('.pokemon__previous-button')
+        const previousButton = document.querySelector('.content__previous-button')
         previousButton.disabled = false
-        const nextButton = document.querySelector('.pokemon__next-button')
+        const nextButton = document.querySelector('.content__next-button')
         const nextList = pokemonList2.slice(offset, offset+step)
         if(nextList.length === 0){
             nextButton.disabled = true
@@ -40,8 +40,8 @@ const dynamicPokemonRepository = (function(){
 
     function previousPage(){
         offset = offset-step
-        const previousButton = document.querySelector('.pokemon__previous-button')
-        const nextButton = document.querySelector('.pokemon__next-button')
+        const previousButton = document.querySelector('.content__previous-button')
+        const nextButton = document.querySelector('.content__next-button')
         nextButton.disabled = false
         if(offset === 0 ){
             previousButton.disabled = true
@@ -51,8 +51,8 @@ const dynamicPokemonRepository = (function(){
     // function to load data from https://pokeapi.co/api/v2/pokemon/?limit=150
     function loadList(url = mainUrl){
         document.querySelector('.spinner').classList.remove('hidden')
-        const nextButton = document.querySelector('.pokemon__next-button')
-        const previousButton = document.querySelector('.pokemon__previous-button')
+        const nextButton = document.querySelector('.content__next-button')
+        const previousButton = document.querySelector('.content__previous-button')
         return fetch(url)
             .then(response => response.json())
             .then(response => {
@@ -77,7 +77,7 @@ const dynamicPokemonRepository = (function(){
                     }
                     addDynamicList(pokemon)
                     document.querySelector('.spinner').classList.add('hidden')
-                    document.querySelector('.pokemon__pagination').classList.remove('hidden')
+                    document.querySelector('.content__pagination').classList.remove('hidden')
                 })
             })
             .catch(error => {
@@ -188,7 +188,7 @@ const dynamicPokemonRepository = (function(){
 
             const moves = document.createElement('p')
             moves.innerText = `Moves: ${pokemon.moves.map(move => ` ${move}`)}`
-            
+
             details.appendChild(type)
             details.appendChild(height)
             details.appendChild(weight)
