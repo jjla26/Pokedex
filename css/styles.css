@@ -155,9 +155,8 @@ li {
     align-items: center;
 }
 
-.content__header button {
+.content__header-actions {
     display: none;
-    padding: 0;
 }
 
 .pokemon__dynamic-list {
@@ -406,7 +405,7 @@ input:focus {
         display: none;
     }
 
-    .content__header button {
+    .content__header-actions {
         display: flex;
     }
 }
