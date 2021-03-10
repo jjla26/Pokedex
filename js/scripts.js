@@ -1,3 +1,47 @@
+(function(){
+
+    // Building the static pokemon app when click in static App
+
+    document.querySelector('.content__option').lastElementChild.addEventListener('click', () => {
+        const pokemonContainer = document.querySelector('.content')
+        const listContainer = document.querySelector('.pokemon__list')
+        const sidebarActions = document.querySelectorAll('.sidebar__item')
+        const header = document.querySelector('.content__header')
+        const appOptions = pokemonContainer.querySelector('.content__option')
+        const appSelectionButtons = appOptions.querySelectorAll('button')
+        const pokemonList = staticPokemonRepository.getAll()
+
+        pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
+        staticPokemonRepository.renderStaticCount()
+        listContainer.classList.remove('hidden')
+        sidebarActions[0].classList.remove('hidden')
+        sidebarActions[1].classList.remove('hidden')
+        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+
+        const addButton = document.createElement('button')
+        addButton.classList.add('add-btn', 'action__button')
+        addButton.innerText = "+"
+        header.appendChild(addButton)
+
+        const filterButton = document.createElement('button')
+        filterButton.classList.add('add-btn', 'action__button')
+        const filterImage = document.createElement('img')
+        filterImage.src = './img/filter.svg'
+        filterButton.appendChild(filterImage)
+        header.appendChild(filterButton)
+
+        const restoreButton = document.createElement('button')
+        restoreButton.classList.add('add-btn', 'action__button')
+        const restoreImage = document.createElement('img')
+        restoreImage.src = './img/restore.svg'
+        restoreButton.appendChild(restoreImage)
+        header.appendChild(restoreButton)
+
+        appSelectionButtons.forEach(element => element.classList.add('hidden'))
+    })
+    
+})()
+
 window.onload = () => {
     const listContainer = document.querySelector('.pokemon__list')
     const addPokemonButton = document.querySelector('.sidebar__list').firstElementChild
@@ -11,17 +55,6 @@ window.onload = () => {
     const appOptions = pokemonContainer.querySelector('.content__option')
     const actionList = document.querySelectorAll('.sidebar__item')
     const appSelectionButtons = appOptions.querySelectorAll('button')
-    // Action for Static App button
-    appOptions.lastElementChild.onclick = () => {
-        const pokemonList = staticPokemonRepository.getAll()
-        pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
-        staticPokemonRepository.renderStaticCount()
-        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
-        listContainer.classList.remove('hidden')
-        actionList[0].classList.remove('hidden')
-        actionList[1].classList.remove('hidden')
-        appSelectionButtons.forEach(element => element.classList.add('hidden'))
-    }
 
     //Action for Dynamic App button
     const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
