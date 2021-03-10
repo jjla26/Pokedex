@@ -23,12 +23,20 @@
         addButton.innerText = "+"
         header.appendChild(addButton)
 
+        addButton.addEventListener('click', () => {
+            addButtonAction()
+        })
+
         const filterButton = document.createElement('button')
         filterButton.classList.add('add-btn', 'action__button')
         const filterImage = document.createElement('img')
         filterImage.src = './img/filter.svg'
         filterButton.appendChild(filterImage)
         header.appendChild(filterButton)
+
+        filterButton.addEventListener('click', () => {
+            filterButtonAction()
+        })
 
         const restoreButton = document.createElement('button')
         restoreButton.classList.add('add-btn', 'action__button')
@@ -39,6 +47,33 @@
 
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     })
+
+    // Function that shows a modal to add a pokemon
+    function addButtonAction(){
+        const pokemonForm = document.querySelector('.form__pokemon')
+        document.querySelectorAll('input').forEach(el => el.value = '')
+        pokemonForm.classList.remove('hidden')
+        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
+        modal.showModal('Add a new Pokemon', pokemonForm)
+    }
+
+    function filterButtonAction(){
+        const filterPokemonForm = document.querySelector('.form__filter')
+        filterPokemonForm.classList.remove('hidden')
+        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
+    }
+
+    // Add buttons listeners
+    document.querySelector('.sidebar__list').firstElementChild.addEventListener('click', () => {
+        addButtonAction()
+    })
+
+    // Action that shows a filter pokemon form
+    document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
+        filterButtonAction()
+    })
+
+
     
 })()
 
@@ -70,20 +105,6 @@ window.onload = () => {
         dynamicListContainer.classList.remove('hidden')
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     }
-
-    // Action that shows a pokemon form
-    addPokemonButton.addEventListener('click', () => {
-        document.querySelectorAll('input').forEach(el => el.value = '')
-        pokemonForm.classList.remove('hidden')
-        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
-        modal.showModal('Add a new Pokemon', pokemonForm)
-    })
-
-    // Action that shows a filter pokemon form
-    filterPokemonButton.addEventListener('click', () => {
-        filterPokemonForm.classList.remove('hidden')
-        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
-    })
 
     // Action for adding a new pokemon after submitting form
     pokemonForm.onsubmit = e => {
