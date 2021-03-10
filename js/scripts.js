@@ -1,14 +1,10 @@
 window.onload = () => {
     const listContainer = document.querySelector('.pokemon__list')
-    const closeModalButton = document.querySelector('.modal__close')
     const addPokemonButton = document.querySelector('.action__list').firstElementChild
     const filterPokemonButton = addPokemonButton.nextElementSibling
     const restoreButton = document.querySelector('.action__list').lastElementChild
     const pokemonForm = document.querySelector('.form__pokemon')
     const filterPokemonForm = document.querySelector('.form__filter')
-    const modal = document.querySelector('.modal')
-    const modalBody = document.querySelector('.modal__body')
-    const modalTitle = document.querySelector('.modal__title')
 
     // Chosing Dynamic or Static App
     const pokemonContainer = document.querySelector('.pokemon')
@@ -42,29 +38,19 @@ window.onload = () => {
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     }
 
-    // Action that opens modal for adding a new pokemon
+    // Action that shows a pokemon form
     addPokemonButton.addEventListener('click', () => {
-        modal.classList.remove('hidden')
-        pokemonForm.classList.remove('hidden')
         document.querySelectorAll('input').forEach(el => el.value = '')
+        pokemonForm.classList.remove('hidden')
         pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
-        modalTitle.innerText = 'Add a new Pokemon'
+        modal.showModal('Add a new Pokemon', pokemonForm)
     })
 
-    // Action that opens modal for filtering pokemon by name 
+    // Action that shows a filter pokemon form
     filterPokemonButton.addEventListener('click', () => {
-        modal.classList.remove('hidden')
         filterPokemonForm.classList.remove('hidden')
-        modalTitle.innerText = 'Filter Pokemon By Name'
-        modalBody.appendChild(filterPokemonForm)
+        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
     })
-
-    // Action to close modal
-    closeModalButton.onclick = () => {
-        modal.classList.add('hidden')
-        pokemonForm.classList.add('hidden')
-        filterPokemonForm.classList.add('hidden')
-    }
 
     // Action for adding a new pokemon after submitting form
     pokemonForm.onsubmit = e => {
@@ -80,8 +66,7 @@ window.onload = () => {
             const sended = staticPokemonRepository.add({name, img, height, weight, types, abilities})
             if(sended){
                 staticPokemonRepository.print(sended)
-                modal.classList.add('hidden')
-                pokemonForm.classList.add('hidden')
+                modal.hideModal()
             }
         }else{
             const pokemonEdited = staticPokemonRepository.edit(id,{name, img, height, weight, types, abilities})
@@ -95,8 +80,7 @@ window.onload = () => {
                         listContainer.replaceChild(newElement, element)
                     }
                 })
-                modal.classList.add('hidden')
-                pokemonForm.classList.add('hidden')
+                modal.hideModal()
             }
         }
     }
@@ -150,7 +134,7 @@ window.onload = () => {
         staticPokemonRepository.filterByName(name)
         filterPokemonButton.classList.add('hidden')
         restoreButton.classList.remove('hidden')
-        modal.classList.add('hidden')
+        modal.hideModal()
         filterPokemonForm.classList.add('hidden')
     }
 }
