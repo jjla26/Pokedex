@@ -22,14 +22,14 @@ const modal = (function(){
     document.querySelector('.modal__close').addEventListener('click', hideModal)
 
     // click outside the modal window close the modal
-    document.querySelector('.modal__close').addEventListener('click', e => {
+    document.querySelector('.modal').addEventListener('click', e => {
+        const modal = document.querySelector('.modal')
         let target = e.target
         if (target === modal) hideModal()
     })
 
     // esc key listener to close modal
     window.addEventListener('keydown', e => {
-        const modal = document.querySelector('.modal')
         if(e.key === "Escape") hideModal()
     })
 
