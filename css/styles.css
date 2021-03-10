@@ -92,7 +92,7 @@ li {
     top: -25px;
     right: -25px;
     background-color: yellow;
-    color: black
+    color: black;
 }
 
 .card__delete-button:focus,
@@ -407,5 +407,12 @@ input:focus {
 
     .content__header-actions {
         display: flex;
+    }
+
+    .details__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
     }
 }
