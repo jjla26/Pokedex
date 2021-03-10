@@ -45,6 +45,26 @@
 
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     })
+
+
+    // Event listener to build the dynamic pokemon app
+
+    document.querySelector('.content__option').firstElementChild.addEventListener('click', () => {
+        const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
+        const pokemonContainer = document.querySelector('.content')
+        const appOptions = pokemonContainer.querySelector('.content__option')
+        const appSelectionButtons = appOptions.querySelectorAll('button')
+        dynamicPokemonRepository
+            .loadList()
+            .then(() => {
+                const pokemonList = dynamicPokemonRepository.getPokemonList2()
+                dynamicPokemonRepository.printList(pokemonList)
+                dynamicPokemonRepository.renderDynamicCount()
+            })
+        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+        dynamicListContainer.classList.remove('hidden')
+        appSelectionButtons.forEach(element => element.classList.add('hidden'))
+    })
     
 })()
 
@@ -54,27 +74,6 @@ window.onload = () => {
     const filterPokemonButton = addPokemonButton.nextElementSibling
     const pokemonForm = document.querySelector('.form__pokemon')
     const filterPokemonForm = document.querySelector('.form__filter')
-
-    // Chosing Dynamic or Static App
-    const pokemonContainer = document.querySelector('.content')
-    const appOptions = pokemonContainer.querySelector('.content__option')
-    const actionList = document.querySelectorAll('.sidebar__item')
-    const appSelectionButtons = appOptions.querySelectorAll('button')
-
-    //Action for Dynamic App button
-    const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')
-    appOptions.firstElementChild.onclick = async () => {
-        dynamicPokemonRepository
-            .loadList()
-            .then(() => {
-                const pokemonList2 = dynamicPokemonRepository.getPokemonList2()
-                dynamicPokemonRepository.printList(pokemonList2)
-                dynamicPokemonRepository.renderDynamicCount()
-            })
-        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
-        dynamicListContainer.classList.remove('hidden')
-        appSelectionButtons.forEach(element => element.classList.add('hidden'))
-    }
 
     // Action for adding a new pokemon after submitting form
     pokemonForm.onsubmit = e => {
