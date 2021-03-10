@@ -133,6 +133,8 @@ const dynamicPokemonRepository = (function(){
         abilities.innerText = `Abilities: ${pokemon.abilities}`
         descriptionContainer.appendChild(abilities)
 
+        cardListener(card, pokemon)
+
         listContainer.appendChild(card)          
     }
 
@@ -152,6 +154,51 @@ const dynamicPokemonRepository = (function(){
             listContainer.appendChild(card)
 
             detailListener(card, pokemon)
+        })
+    }
+
+    //function to add event listener for pokemon card 
+
+    function cardListener(element, pokemon){
+        element.addEventListener('click', () => {
+            const detailsContainer = document.createElement('div')
+            detailsContainer.classList.add('details__container')
+            
+            const imageContainer = document.createElement('div')
+            imageContainer.classList.add('details__image')
+            
+            const details = document.createElement('div')
+            details.classList.add('details__content')
+            
+            const image = document.createElement('img')
+            image.classList.add('card__image')
+            image.src = pokemon.img
+    
+            const type = document.createElement('p')
+            type.innerText = `Type: ${pokemon.types}`
+    
+            const height = document.createElement('p')
+            height.innerText = `Height: ${pokemon.height}`
+            
+            const weight = document.createElement('p')
+            weight.innerText = `Weight: ${pokemon.weight}`
+    
+            const abilities = document.createElement('p')
+            abilities.innerText = `Abilities: ${pokemon.abilities}`
+
+            const moves = document.createElement('p')
+            moves.innerText = `Moves: ${pokemon.moves.map(move => ` ${move}`)}`
+            
+            details.appendChild(type)
+            details.appendChild(height)
+            details.appendChild(weight)
+            details.appendChild(abilities)
+            details.appendChild(moves)
+            imageContainer.appendChild(image)
+            detailsContainer.appendChild(imageContainer)
+            detailsContainer.appendChild(details)
+
+            modal.showModal("Pokemon Detail", detailsContainer)
         })
     }
 
@@ -184,6 +231,7 @@ const dynamicPokemonRepository = (function(){
                     pokemon.weight = response.weight
                     pokemon.types = response.types.map(type => type.type.name)
                     pokemon.abilities = response.abilities.map(ability => ability.ability.name)
+                    pokemon.moves = response.moves.map(move => move.move.name)
                     printCard(pokemon)
                 })
         }
