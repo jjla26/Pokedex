@@ -50,55 +50,56 @@
             <div class="modal__content">
                 <span class="modal__close">&times;</span>
                 <h2 class="modal__title"></h2>
-                <div class="modal__body">
-                    <form class="form__pokemon hidden">
-                        <input id="id" type="text">
-                        <div class="input__group">
-                            <label for="name">Name</label>
-                            <input id="name" type="text" placeholder="Ex: Charizard" required>
-                        </div>
-                        <div class="input__group">
-                            <label for="img">Image URL</label>
-                            <input id="img" type="text" placeholder="Prefer SVG images" required>
-                        </div>
-                        <div class="input__group">
-                            <label for="height">Height</label>
-                            <input id="height" type="number" step="any" placeholder="Ex: 0.7" required>
-                        </div>
-                        <div class="input__group">
-                            <label for="weight">Weight</label>
-                            <input id="weight" type="number" step="any" placeholder="Ex: 1.2" required>
-                        </div>
-                        <div class="input__group">
-                            <label for="type">Type:</label>
-                            <input id="type" type="text" placeholder="Ex: fire, flying" required>
-                        </div>
-                        <div class="input__group">
-                            <label for="abilities">Abilities</label>
-                            <input id="abilities" type="text" placeholder="Ex: jump, run" required>
-                        </div>
-                        <div class="input__group">
-                            <button id="submit-form" type="submit">Add a New Pokemon</button>
-                        </div>
-                    </form>
-            
-                    <form class="form__filter hidden">
-                        <div class="input__group">
-                            <label for="name__filter">Name</label>
-                            <input id="name__filter" type="text" placeholder="Ex: Charmander" required>
-                        </div>
-                        <div class="input__group">
-                            <button type="submit">Filter by Name</button>
-                        </div>
-                    </form>
-                </div>
+                <div class="modal__body"></div>
             </div>
         </div>
+
+        <form class="form__pokemon hidden">
+            <input id="id" type="text">
+            <div class="input__group">
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Ex: Charizard" required>
+            </div>
+            <div class="input__group">
+                <label for="img">Image URL</label>
+                <input id="img" type="text" placeholder="Prefer SVG images" required>
+            </div>
+            <div class="input__group">
+                <label for="height">Height</label>
+                <input id="height" type="number" step="any" placeholder="Ex: 0.7" required>
+            </div>
+            <div class="input__group">
+                <label for="weight">Weight</label>
+                <input id="weight" type="number" step="any" placeholder="Ex: 1.2" required>
+            </div>
+            <div class="input__group">
+                <label for="type">Type:</label>
+                <input id="type" type="text" placeholder="Ex: fire, flying" required>
+            </div>
+            <div class="input__group">
+                <label for="abilities">Abilities</label>
+                <input id="abilities" type="text" placeholder="Ex: jump, run" required>
+            </div>
+            <div class="input__group">
+                <button id="submit-form" type="submit">Add a New Pokemon</button>
+            </div>
+        </form>
+
+        <form class="form__filter hidden">
+            <div class="input__group">
+                <label for="name__filter">Name</label>
+                <input id="name__filter" type="text" placeholder="Ex: Charmander" required>
+            </div>
+            <div class="input__group">
+                <button type="submit">Filter by Name</button>
+            </div>
+        </form>
 
     </main>
 
     <script src="js/utils/promise-polyfill.js"></script>
     <script src="js/utils/fetch-polyfill.js"></script>
+    <script src="js/modal/modal.js"></script>
     <script src="js/staticPokemonApp/staticPokemon.js"></script>
     <script src="js/dynamicPokemonApp/dynamicPokemon.js"></script>
     <script src="js/scripts.js"></script>
