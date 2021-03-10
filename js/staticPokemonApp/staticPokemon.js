@@ -272,12 +272,13 @@ const staticPokemonRepository = (function(){
 
     //function that restore the pokemon list after filtered
     function restoreButtonAction(){
-        const header = document.querySelector('.content__header')
-        const appOptions = pokemonContainer.querySelector('.content__option')
-        const appSelectionButtons = appOptions.querySelectorAll('button')
-        staticPokemonRepository.restoreList()
-        restoreButton.classList.add('hidden')
-        filterPokemonButton.classList.remove('hidden')
+        const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
+        const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
+        restoreButtonHeader.classList.add('hidden')
+        restoreButtonSidebar.classList.add('hidden')
+        restoreButtonSidebar.previousElementSibling.classList.remove('hidden')
+        restoreButtonHeader.previousElementSibling.classList.remove('hidden')
+        restoreList()
     }
 
     // Add buttons listeners
@@ -289,6 +290,9 @@ const staticPokemonRepository = (function(){
     document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
         filterButtonAction()
     })
+
+    // Action that restore the list of pokemon
+    document.querySelector('.sidebar__list').lastElementChild.addEventListener('click', restoreButtonAction)
 
     return {
         getAll: getAll,

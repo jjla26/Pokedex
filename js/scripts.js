@@ -6,7 +6,7 @@
         const pokemonContainer = document.querySelector('.content')
         const listContainer = document.querySelector('.pokemon__list')
         const sidebarActions = document.querySelectorAll('.sidebar__item')
-        const header = document.querySelector('.content__header')
+        const headerActions = document.querySelector('.content__header-actions')
         const appOptions = pokemonContainer.querySelector('.content__option')
         const appSelectionButtons = appOptions.querySelectorAll('button')
         const pokemonList = staticPokemonRepository.getAll()
@@ -21,7 +21,7 @@
         const addButton = document.createElement('button')
         addButton.classList.add('add-btn', 'action__button')
         addButton.innerText = "+"
-        header.appendChild(addButton)
+        headerActions.appendChild(addButton)
 
         addButton.addEventListener('click', staticPokemonRepository.addButtonAction)
 
@@ -30,7 +30,7 @@
         const filterImage = document.createElement('img')
         filterImage.src = './img/filter.svg'
         filterButton.appendChild(filterImage)
-        header.appendChild(filterButton)
+        headerActions.appendChild(filterButton)
 
         filterButton.addEventListener('click', staticPokemonRepository.filterButtonAction)
 
@@ -39,7 +39,7 @@
         const restoreImage = document.createElement('img')
         restoreImage.src = './img/restore.svg'
         restoreButton.appendChild(restoreImage)
-        header.appendChild(restoreButton)
+        headerActions.appendChild(restoreButton)
 
         restoreButton.addEventListener('click', staticPokemonRepository.restoreButtonAction)
 
@@ -52,7 +52,6 @@ window.onload = () => {
     const listContainer = document.querySelector('.pokemon__list')
     const addPokemonButton = document.querySelector('.sidebar__list').firstElementChild
     const filterPokemonButton = addPokemonButton.nextElementSibling
-    const restoreButton = document.querySelector('.sidebar__list').lastElementChild
     const pokemonForm = document.querySelector('.form__pokemon')
     const filterPokemonForm = document.querySelector('.form__filter')
 
@@ -148,10 +147,14 @@ window.onload = () => {
 
     filterPokemonForm.onsubmit = e => {
         e.preventDefault()
+        const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
+        const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
         const name = document.getElementById('name__filter').value
         staticPokemonRepository.filterByName(name)
         filterPokemonButton.classList.add('hidden')
-        restoreButton.classList.remove('hidden')
+        restoreButtonHeader.previousSibling.classList.add('hidden')
+        restoreButtonSidebar.classList.remove('hidden')
+        restoreButtonHeader.classList.remove('hidden')
         modal.hideModal()
         filterPokemonForm.classList.add('hidden')
     }
