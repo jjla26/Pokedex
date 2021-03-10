@@ -89,7 +89,7 @@ window.onload = () => {
     // Pagination next listener
     let page = 0
     let offset = 5
-    const nextPageButton = document.querySelector('.pokemon__next-button')
+    const nextPageButton = document.querySelector('.content__next-button')
     nextPageButton.onclick = () => {
         page += 1
         document.querySelectorAll('.pokemon__item').forEach(element => {
@@ -110,7 +110,7 @@ window.onload = () => {
     }
 
     // Pagination previous listener
-    const previousButton = document.querySelector('.pokemon__previous-button')
+    const previousButton = document.querySelector('.content__previous-button')
     previousButton.onclick = () => {
         page -= 1
         document.querySelectorAll('.pokemon__item').forEach(element => {
