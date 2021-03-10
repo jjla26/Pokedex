@@ -254,6 +254,42 @@ const staticPokemonRepository = (function(){
         }  
     }
 
+    // Function that shows a modal to add a pokemon
+    function addButtonAction(){
+        const pokemonForm = document.querySelector('.form__pokemon')
+        document.querySelectorAll('input').forEach(el => el.value = '')
+        pokemonForm.classList.remove('hidden')
+        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
+        modal.showModal('Add a new Pokemon', pokemonForm)
+    }
+
+    // Function that shows a filter modal
+    function filterButtonAction(){
+        const filterPokemonForm = document.querySelector('.form__filter')
+        filterPokemonForm.classList.remove('hidden')
+        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
+    }
+
+    //function that restore the pokemon list after filtered
+    function restoreButtonAction(){
+        const header = document.querySelector('.content__header')
+        const appOptions = pokemonContainer.querySelector('.content__option')
+        const appSelectionButtons = appOptions.querySelectorAll('button')
+        staticPokemonRepository.restoreList()
+        restoreButton.classList.add('hidden')
+        filterPokemonButton.classList.remove('hidden')
+    }
+
+    // Add buttons listeners
+    document.querySelector('.sidebar__list').firstElementChild.addEventListener('click', () => {
+        addButtonAction()
+    })
+
+    // Action that shows a filter pokemon form
+    document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
+        filterButtonAction()
+    })
+
     return {
         getAll: getAll,
         add: add,
@@ -263,5 +299,8 @@ const staticPokemonRepository = (function(){
         restoreList: restoreList,
         filterByName: filterByName,
         renderStaticCount: renderStaticCount,
+        addButtonAction: addButtonAction,
+        filterButtonAction: filterButtonAction,
+        restoreButtonAction: restoreButtonAction
     }
 })()

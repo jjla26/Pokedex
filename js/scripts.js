@@ -23,9 +23,7 @@
         addButton.innerText = "+"
         header.appendChild(addButton)
 
-        addButton.addEventListener('click', () => {
-            addButtonAction()
-        })
+        addButton.addEventListener('click', staticPokemonRepository.addButtonAction)
 
         const filterButton = document.createElement('button')
         filterButton.classList.add('add-btn', 'action__button')
@@ -34,46 +32,19 @@
         filterButton.appendChild(filterImage)
         header.appendChild(filterButton)
 
-        filterButton.addEventListener('click', () => {
-            filterButtonAction()
-        })
+        filterButton.addEventListener('click', staticPokemonRepository.filterButtonAction)
 
         const restoreButton = document.createElement('button')
-        restoreButton.classList.add('add-btn', 'action__button')
+        restoreButton.classList.add('add-btn', 'action__button', 'hidden')
         const restoreImage = document.createElement('img')
         restoreImage.src = './img/restore.svg'
         restoreButton.appendChild(restoreImage)
         header.appendChild(restoreButton)
 
+        restoreButton.addEventListener('click', staticPokemonRepository.restoreButtonAction)
+
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     })
-
-    // Function that shows a modal to add a pokemon
-    function addButtonAction(){
-        const pokemonForm = document.querySelector('.form__pokemon')
-        document.querySelectorAll('input').forEach(el => el.value = '')
-        pokemonForm.classList.remove('hidden')
-        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
-        modal.showModal('Add a new Pokemon', pokemonForm)
-    }
-
-    function filterButtonAction(){
-        const filterPokemonForm = document.querySelector('.form__filter')
-        filterPokemonForm.classList.remove('hidden')
-        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
-    }
-
-    // Add buttons listeners
-    document.querySelector('.sidebar__list').firstElementChild.addEventListener('click', () => {
-        addButtonAction()
-    })
-
-    // Action that shows a filter pokemon form
-    document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
-        filterButtonAction()
-    })
-
-
     
 })()
 
@@ -173,13 +144,6 @@ window.onload = () => {
         const list = [ ...document.querySelectorAll('.pokemon__item') ]
         list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
         dynamicPokemonRepository.previousPage()
-    }
-
-    restoreButton.onclick = () => {
-        staticPokemonRepository.restoreList()
-        restoreButton.classList.add('hidden')
-        filterPokemonButton.classList.remove('hidden')
-
     }
 
     filterPokemonForm.onsubmit = e => {
