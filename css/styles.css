@@ -139,7 +139,7 @@ li {
     justify-content: space-around;
 }
 
-.pokemon__pagination {
+.content__paggination {
     display: flex;
 }
 
