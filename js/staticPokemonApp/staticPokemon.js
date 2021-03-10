@@ -63,7 +63,7 @@ const staticPokemonRepository = (function(){
     }
 
     function renderStaticCount(){
-        const count = document.querySelector('.pokemon').querySelector('span')
+        const count = document.querySelector('.content').querySelector('span')
         count.classList.remove('hidden')
         count.innerText = `(Total Pokemon: ${getAll().length})`
     }

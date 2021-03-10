@@ -165,7 +165,7 @@ li {
     background-color: var(--secondary-darker);
 }
 
-.pokemon {
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -183,7 +183,7 @@ li {
     min-height: 100vh;
 }
 
-.pokemon__option {
+.content__option {
     display: flex;
     width: 60%;
     justify-content: space-around;

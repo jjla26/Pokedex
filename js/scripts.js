@@ -7,8 +7,8 @@ window.onload = () => {
     const filterPokemonForm = document.querySelector('.form__filter')
 
     // Chosing Dynamic or Static App
-    const pokemonContainer = document.querySelector('.pokemon')
-    const appOptions = pokemonContainer.querySelector('.pokemon__option')
+    const pokemonContainer = document.querySelector('.content')
+    const appOptions = pokemonContainer.querySelector('.content__option')
     const actionList = document.querySelectorAll('.sidebar__item')
     const appSelectionButtons = appOptions.querySelectorAll('button')
     // Action for Static App button
