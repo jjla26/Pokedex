@@ -132,8 +132,8 @@ li {
 /* styles of the pokemon panel */
 
 .pokemon__list {
+    width: 50%;
     display: flex;
-    flex-grow: 1;
     height: 100%;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -160,7 +160,7 @@ li {
 }
 
 .pokemon__dynamic-list {
-    width: 500px;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -172,7 +172,7 @@ li {
     margin: 10px;
     padding: 10px;
     box-shadow: 0 0 2px black;
-    width: 300px;
+    width: 80%;
     cursor: pointer;
     color: var(--primary);
 }
@@ -419,5 +419,13 @@ input:focus {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .pokemon__list {
+        width: 100%;
+    }
+
+    .pokemon__dynamic-list {
+        width: 100%;
     }
 }
