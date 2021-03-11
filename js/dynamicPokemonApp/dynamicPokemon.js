@@ -50,7 +50,8 @@ const dynamicPokemonRepository = (function(){
 
     // function to load data from https://pokeapi.co/api/v2/pokemon/?limit=150
     function loadList(url = mainUrl){
-        document.querySelector('.spinner').classList.remove('hidden')
+        const container = document.querySelector('.pokemon__dynamic-list')
+        container.querySelector('.spinner').classList.remove('hidden')
         const nextButton = document.querySelector('.content__next-button')
         const previousButton = document.querySelector('.content__previous-button')
         return fetch(url)
@@ -76,12 +77,12 @@ const dynamicPokemonRepository = (function(){
                         detailsUrl: item.url
                     }
                     addDynamicList(pokemon)
-                    document.querySelector('.spinner').classList.add('hidden')
+                    container.querySelector('.spinner').classList.add('hidden')
                     document.querySelector('.content__pagination').classList.remove('hidden')
                 })
             })
             .catch(error => {
-                document.querySelector('.spinner').classList.remove('hidden')
+                container.querySelector('.spinner').classList.remove('hidden')
             })
     }
     
@@ -94,8 +95,8 @@ const dynamicPokemonRepository = (function(){
     }
 
     // function that prints the list of pokemons 
-    function printCard(pokemon){
-        const listContainer = document.querySelector('.pokemon__list')
+    function printCard(pokemon, element){
+        const listContainer = element.parentNode
 
         const card = document.createElement('div')
         card.classList.add('card', ...pokemon.types) 
@@ -135,7 +136,7 @@ const dynamicPokemonRepository = (function(){
 
         cardListener(card, pokemon)
 
-        listContainer.appendChild(card)          
+        listContainer.insertBefore(card, element.nextSibling)          
     }
 
     // function that prints the pokemonlist2
@@ -205,15 +206,13 @@ const dynamicPokemonRepository = (function(){
     //function to add event listener for pokemon detail
     function detailListener(element, pokemon){
         element.addEventListener('click', e => {
-            showDetails(pokemon)
+            showDetails(pokemon, element)
         })
     }
 
-    function showDetails(pokemon){
-        const list = document.querySelector('.pokemon__list')
-        list.classList.remove('hidden')
+    function showDetails(pokemon, element){
         if(pokemon.height){
-            list.querySelectorAll('.card').forEach(card => {
+            element.parentNode.querySelectorAll('.card').forEach(card => {
                 if(card.querySelector('h3').innerText === pokemon.name){
                     card.classList.toggle('hidden')
                 }else{
@@ -221,10 +220,7 @@ const dynamicPokemonRepository = (function(){
                 }
             })
         }else{
-            list.querySelectorAll('.card').forEach(card => {
-                card.classList.add('hidden')
-            })
-            loadDetails(pokemon)
+            loadDetails(pokemon, element)
                 .then(response => {
                     pokemon.img = response.sprites.other.dream_world.front_default
                     pokemon.height = response.height
@@ -232,23 +228,27 @@ const dynamicPokemonRepository = (function(){
                     pokemon.types = response.types.map(type => type.type.name)
                     pokemon.abilities = response.abilities.map(ability => ability.ability.name)
                     pokemon.moves = response.moves.map(move => move.move.name)
-                    printCard(pokemon)
+                    printCard(pokemon, element)
                 })
         }
 
     }
 
-    function loadDetails(pokemon){
-        const spinner = document.querySelector('.pokemon__list').querySelector('.spinner')
+    function loadDetails(pokemon, element){
+        const spinnerContainer = document.querySelector('.pokemon__container')
+        const spinner = spinnerContainer.querySelector('.spinner')
         spinner.classList.remove('hidden')
+        element.parentNode.insertBefore(spinner, element.nextSibling)
         return fetch(pokemon.detailsUrl)
             .then(response => response.json())
             .then(response => {
                 spinner.classList.add('hidden')
+                spinnerContainer.appendChild(spinner)
                 return response
             })
             .catch(error => {
                 spinner.classList.add('hidden')
+                spinnerContainer.appendChild(spinner)            
             })
     }
 
