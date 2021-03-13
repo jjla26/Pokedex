@@ -4,7 +4,7 @@ const staticPokemonRepository = (function(){
     let pokemonList = [ {
         id: Math.random().toString(36),
         name: 'Bulbasaur',
-        img: './img/bulbasaur.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
         height: 0.7,
         weight: 6.9,
         abilities: [ 'chlorophyll', 'overgrow' ],
@@ -14,7 +14,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Pidgey',
-        img: './img/pidgey.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/16.svg',
         height: 0.3,
         weight: 1.8,
         abilities: [ 'keen-eye', 'tangled-feet', 'big-pecks' ],
@@ -23,7 +23,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Pikachu',
-        img: './img/pikachu.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg',
         height: 0.4,
         weight: 6,
         abilities: [ 'static', 'lightningrod' ],
@@ -32,7 +32,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Ponyta',
-        img: './img/ponyta.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/77.svg',
         height: 1,
         weight: 30,
         abilities: [ 'flash-fire', 'flame-body', 'run-away' ],
@@ -41,7 +41,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Squirtle',
-        img: './img/squirtle.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/7.svg',
         height: 0.5,
         weight: 9,
         abilities: [ 'rain-dish', 'torrent' ],
@@ -50,7 +50,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Charmander',
-        img: './img/charmander.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg',
         height: 0.6,
         weight: 8.5,
         abilities: [ 'blaze', 'solar-power' ],
@@ -105,6 +105,7 @@ const staticPokemonRepository = (function(){
         const image = document.createElement('img')
         image.classList.add('card__image')
         image.src = pokemon.img
+        image.crossOrigin = 'anonymous'
         imageContainer.appendChild(image)
 
         const name = document.createElement('h3')
@@ -132,6 +133,21 @@ const staticPokemonRepository = (function(){
         descriptionContainer.appendChild(abilities)
 
         listContainer.appendChild(card)
+
+        image.addEventListener('load', function() {
+            var vibrant = new Vibrant(image);
+            var swatches = vibrant.swatches()
+            for (var swatch in swatches) {
+                if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
+                    console.log(swatch, swatches[swatch].getHex())
+                    if(swatch === 'Vibrant'){
+                        const color = swatches[swatch].getHex()
+                        console.log(color)
+                        card.style.backgroundImage =  `linear-gradient(0deg, ${color}, rgba(255, 255, 255))`
+                        card.style.border = `10px solid ${color}`
+                    }
+                }
+        }});
 
         // addlisteners for delete and edit button
         deleteButtonListener(deleteButton)
