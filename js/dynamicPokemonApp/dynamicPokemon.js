@@ -108,6 +108,7 @@ const dynamicPokemonRepository = (function(){
         const image = document.createElement('img')
         image.classList.add('card__image')
         image.src = pokemon.img
+        image.crossOrigin = 'anonymous'
         imageContainer.appendChild(image)
 
         const name = document.createElement('h3')
@@ -135,6 +136,22 @@ const dynamicPokemonRepository = (function(){
         descriptionContainer.appendChild(abilities)
 
         cardListener(card, pokemon)
+        
+        image.addEventListener('load', function() {
+            console.log("asdad")
+            var vibrant = new Vibrant(image);
+            var swatches = vibrant.swatches()
+            for (var swatch in swatches) {
+                if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
+                    console.log(swatch, swatches[swatch].getHex())
+                    if(swatch === 'Vibrant'){
+                        const color = swatches[swatch].getHex()
+                        console.log(color)
+                        card.style.backgroundImage =  `linear-gradient(0deg, ${color}, rgba(255, 255, 255))`
+                        card.style.border = `10px solid ${color}`
+                    }
+                }
+        }});
 
         listContainer.insertBefore(card, element.nextSibling)          
     }
