@@ -16,6 +16,7 @@
         listContainer.classList.remove('hidden')
         sidebarActions[0].classList.remove('hidden')
         sidebarActions[1].classList.remove('hidden')
+        document.querySelector('#addPokemon').classList.remove('hidden')
         document.querySelector('.header__filter').classList.remove('hidden')
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
 
@@ -104,7 +105,7 @@ window.onload = () => {
                         listContainer.replaceChild(newElement, element)
                     }
                 })
-                modal.hideModal()
+                    .hideModal()
             }
         }
     }

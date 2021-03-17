@@ -306,6 +306,10 @@ const staticPokemonRepository = (function(){
         addButtonAction()
     })
 
+    document.querySelector('#addPokemon').addEventListener('click', () => {
+        addButtonAction()
+    })
+
     // Action that shows a filter pokemon form
     document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
         filterButtonAction()

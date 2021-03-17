@@ -44,6 +44,14 @@ li {
     color: var(--secondary) !important;
 }
 
+.navbar button {
+    background-color: inherit !important;
+}
+
+.navbar button:hover {
+    background-color: inherit !important;
+}
+
 /* styles for the pokemon card */
 
 .card {
@@ -91,7 +99,7 @@ li {
     height: 40px;
     width: 40px;
     padding: 0;
-    color: white;
+    color: white !important;
     position: relative;
     border-radius: 50%;
     display: flex;
@@ -104,7 +112,7 @@ li {
 .delete-btn {
     top: -25px;
     right: -25px;
-    background-color: red;
+    background-color: red !important;
 }
 
 .add-btn {
@@ -116,8 +124,8 @@ li {
 .edit-btn {
     top: -25px;
     right: -25px;
-    background-color: yellow;
-    color: black;
+    background-color: yellow !important;
+    color: black !important;
 }
 
 .card__delete-button:focus,
@@ -288,7 +296,7 @@ li {
     box-shadow: 0 0 2px black;
 }
 
-button,
+/* button,
 .button {
     border: 1px solid var(--primary-darker);
     border-radius: 5px;
@@ -306,6 +314,18 @@ button,
 button:hover,
 .button:hover {
     background-color: var(--secondary-darker);
+} */
+
+button,
+.button {
+    border: 1px solid var(--primary-darker) !important;
+    background-color: var(--secondary) !important;
+    color: var(--primary) !important;
+}
+
+button:hover,
+.button:hover {
+    background-color: var(--secondary-darker) !important;
 }
 
 /* styles for modal */
