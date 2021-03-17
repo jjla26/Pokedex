@@ -171,6 +171,7 @@ li {
 .content__header-container {
     display: flex;
     width: 100%;
+    margin-top: 50px;
 }
 
 .content__header {
