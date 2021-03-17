@@ -1,6 +1,12 @@
 # This is the Pokedex App
 
-###### In this app we fetch some data from https://pokeapi.co/ and show a list of Pokemon
+## About this APP
+
+###### The Website is divided in 2:
+
+###### One part that uses dynamic data fetched from https://pokeapi.co/ to show a list of Pokemon and their details.
+
+###### A second part is a pokemon CRUD that has some static data pre-loaded
 
 ## Want to experiment with this app?
 
