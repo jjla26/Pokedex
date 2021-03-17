@@ -20,6 +20,30 @@ li {
     list-style-type: none;
 }
 
+/* bootstrap navbar styles */
+
+.navbar {
+    background-color: var(--primary-darker) !important;
+}
+
+.navbar img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--secondary-darker) !important;
+}
+
+.nav-link.active,
+.navbar-brand:active,
+.navbar-brand:hover,
+.nav-link:hover,
+.nav-link:active {
+    color: var(--secondary) !important;
+}
+
 /* styles for the pokemon card */
 
 .card {
