@@ -310,6 +310,9 @@ const dynamicPokemonRepository = (function(){
         document.querySelectorAll('.pokemon__item').forEach(element => {
             element.classList.add('hidden')
         })
+        document.querySelectorAll('.card').forEach(element => {
+            element.classList.add('hidden')
+        })
         const list = [ ...document.querySelectorAll('.pokemon__item') ]
         list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
     }
