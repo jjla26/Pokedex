@@ -3,6 +3,7 @@ const dynamicPokemonRepository = (function(){
     let pokemonList2 = []
     let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5'
     let nextPageUrl = ''
+    let page = 0
     let offset = 0
     let step = 5
     let totalItems
@@ -19,32 +20,52 @@ const dynamicPokemonRepository = (function(){
     }
 
     function nextPage(){
+        page += 1
         offset = offset+step
-        const previousButton = document.querySelector('.content__previous-button')
-        previousButton.disabled = false
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        document.querySelectorAll('.card').forEach(element => {
+            element.classList.add('hidden')
+        })
+        document.querySelector('.content__previous-button').disabled = false
         const nextButton = document.querySelector('.content__next-button')
         const nextList = pokemonList2.slice(offset, offset+step)
         if(nextList.length === 0){
             nextButton.disabled = true
-            return nextPageUrl
+            loadList(nextPageUrl)
+            .then(() => {
+                const pokemonList2 = getPokemonList2()
+                printList(pokemonList2)
+            })
         }else{
+            const list = [ ...document.querySelectorAll('.pokemon__item') ]
+            list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
             if(totalItems <= offset+step){
                 nextButton.disabled = true
             }else{
                 nextButton.disabled = false
             }
-            return null
         }
     }
 
     function previousPage(){
+        page -= 1
         offset = offset-step
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        document.querySelectorAll('.card').forEach(element => {
+            element.classList.add('hidden')
+        })
         const previousButton = document.querySelector('.content__previous-button')
         const nextButton = document.querySelector('.content__next-button')
         nextButton.disabled = false
         if(offset === 0 ){
             previousButton.disabled = true
         }
+        const list = [ ...document.querySelectorAll('.pokemon__item') ]
+        list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
     }
 
     // function to load data from https://pokeapi.co/api/v2/pokemon/?limit=150
@@ -279,43 +300,10 @@ const dynamicPokemonRepository = (function(){
     }
 
     // Pagination next listener
-    let page = 0
-    const nextPageButton = document.querySelector('.content__next-button')
-    nextPageButton.onclick = () => {
-        page += 1
-        document.querySelectorAll('.pokemon__item').forEach(element => {
-            element.classList.add('hidden')
-        })
-        document.querySelectorAll('.card').forEach(element => {
-            element.classList.add('hidden')
-        })
-        const isNextPage = nextPage()
-        if(isNextPage){
-            loadList(isNextPage)
-                .then(() => {
-                    const pokemonList2 = getPokemonList2()
-                    printList(pokemonList2)
-                })
-        }else{
-            const list = [ ...document.querySelectorAll('.pokemon__item') ]
-            list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
-        }
-    }
+    document.querySelector('.content__next-button').addEventListener('click', nextPage )
 
     // Pagination previous listener
-    const previousButton = document.querySelector('.content__previous-button')
-    previousButton.onclick = () => {
-        page -= 1
-        previousPage()
-        document.querySelectorAll('.pokemon__item').forEach(element => {
-            element.classList.add('hidden')
-        })
-        document.querySelectorAll('.card').forEach(element => {
-            element.classList.add('hidden')
-        })
-        const list = [ ...document.querySelectorAll('.pokemon__item') ]
-        list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
-    }
+    document.querySelector('.content__previous-button').addEventListener('click', previousPage )
 
     return {
         loadList: loadList,
