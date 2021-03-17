@@ -95,6 +95,8 @@ const staticPokemonRepository = (function(){
         const editButton = document.createElement('button')
         editButton.classList.add('edit-btn', 'action__button')
         editButton.innerText = 'edit'
+        editButton.setAttribute('data-bs-toggle', 'modal')
+        editButton.setAttribute('data-bs-target', '#modal')
         action.appendChild(deleteButton)
         action.appendChild(editButton)
 
@@ -174,7 +176,7 @@ const staticPokemonRepository = (function(){
             document.getElementById('type').value = pokemon.types.join()
             document.getElementById('abilities').value = pokemon.abilities.join()
             pokemonForm.querySelector('button').innerText = "Edit Pokemon"
-            customModal.showModal("Edit Pokemon", pokemonForm)
+            modal.showModal("Edit Pokemon", pokemonForm)
         })  
     }
 
@@ -274,7 +276,7 @@ const staticPokemonRepository = (function(){
         document.querySelectorAll('input').forEach(el => el.value = '')
         pokemonForm.classList.remove('hidden')
         pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
-        customModal.showModal('Add a new Pokemon', pokemonForm)
+        modal.showModal('Add a new Pokemon', pokemonForm)
     }
 
     // Function that shows a filter modal
@@ -285,7 +287,7 @@ const staticPokemonRepository = (function(){
         pokemonContainer.appendChild(pokemonForm)
         const filterPokemonForm = document.querySelector('.form__filter')
         filterPokemonForm.classList.remove('hidden')
-        customModal.showModal('Filter Pokemon By Name', filterPokemonForm)
+        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
     }
 
     //function that restore the pokemon list after filtered
