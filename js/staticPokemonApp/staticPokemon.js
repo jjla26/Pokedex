@@ -241,12 +241,11 @@ const staticPokemonRepository = (function(){
     // function to filter a pokemon by name 
     function filterByName(name){
         document.querySelectorAll('.card').forEach(el => {
-            if(el.querySelector('h3').innerText.toLowerCase() === name.toLowerCase()){
+            if(el.querySelector('h3').innerText.toLowerCase().indexOf(name.toLowerCase()) > -1){
                 el.classList.remove('hidden')
             }else{
                 el.classList.add('hidden')
             }
-
         })
     }
 
@@ -318,6 +317,11 @@ const staticPokemonRepository = (function(){
 
     // Action that restore the list of pokemon
     document.querySelector('.sidebar__list').lastElementChild.addEventListener('click', restoreButtonAction)
+
+    // Action to filter pokemon by name 
+    document.querySelector('.header__filter').addEventListener('input', e => {
+        filterByName(e.target.value)
+    })
 
     return {
         getAll: getAll,
