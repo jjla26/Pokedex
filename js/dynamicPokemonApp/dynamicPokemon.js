@@ -142,7 +142,6 @@ const dynamicPokemonRepository = (function(){
         // Make sure image is finished loading to extract color
         image.addEventListener('load', function() {
             const color = colorThief.getColor(image);
-            console.log(color)
             card.style.backgroundImage =  `linear-gradient(0deg, rgb(${color}), rgba(255, 255, 255))`
             card.style.border = `10px solid rgb(${color})`
         });
