@@ -7,7 +7,6 @@ const dynamicPokemonRepository = (function(){
     let step = 5
     let totalItems
 
-
     // function to get all the pokemonList2
     function getPokemonList2(){
         return pokemonList2.slice(offset, offset+step)
@@ -247,7 +246,7 @@ const dynamicPokemonRepository = (function(){
     }
 
     function loadDetails(pokemon, element){
-        const spinnerContainer = document.querySelector('.pokemon__container')
+        const spinnerContainer = document.querySelector('.pokemon__dynamic-list')
         const spinner = spinnerContainer.querySelector('.spinner')
         spinner.classList.remove('hidden')
         element.parentNode.insertBefore(spinner, element.nextSibling)
@@ -287,16 +286,19 @@ const dynamicPokemonRepository = (function(){
         document.querySelectorAll('.pokemon__item').forEach(element => {
             element.classList.add('hidden')
         })
-        const nextPage = nextPage()
-        if(nextPage){
-            loadList(nextPage)
+        document.querySelectorAll('.card').forEach(element => {
+            element.classList.add('hidden')
+        })
+        const isNextPage = nextPage()
+        if(isNextPage){
+            loadList(isNextPage)
                 .then(() => {
                     const pokemonList2 = getPokemonList2()
                     printList(pokemonList2)
                 })
         }else{
             const list = [ ...document.querySelectorAll('.pokemon__item') ]
-            list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
+            list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
         }
     }
 
@@ -304,18 +306,16 @@ const dynamicPokemonRepository = (function(){
     const previousButton = document.querySelector('.content__previous-button')
     previousButton.onclick = () => {
         page -= 1
+        previousPage()
         document.querySelectorAll('.pokemon__item').forEach(element => {
             element.classList.add('hidden')
         })
         const list = [ ...document.querySelectorAll('.pokemon__item') ]
-        list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
-        previousPage()
+        list.slice(page*step, page*step+step).forEach(element => element.classList.remove('hidden'))
     }
 
     return {
         loadList: loadList,
-        nextPage: nextPage,
-        previousPage: previousPage,
         getPokemonList2: getPokemonList2,
         addDynamicList: addDynamicList,
         printList: printList,
