@@ -4,7 +4,7 @@ const staticPokemonRepository = (function(){
     let pokemonList = [ {
         id: Math.random().toString(36),
         name: 'Bulbasaur',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
         height: 0.7,
         weight: 6.9,
         abilities: [ 'chlorophyll', 'overgrow' ],
@@ -14,7 +14,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Pidgey',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/16.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png',
         height: 0.3,
         weight: 1.8,
         abilities: [ 'keen-eye', 'tangled-feet', 'big-pecks' ],
@@ -23,7 +23,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Pikachu',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
         height: 0.4,
         weight: 6,
         abilities: [ 'static', 'lightningrod' ],
@@ -32,7 +32,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Ponyta',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/77.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/77.png',
         height: 1,
         weight: 30,
         abilities: [ 'flash-fire', 'flame-body', 'run-away' ],
@@ -41,7 +41,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Squirtle',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/7.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
         height: 0.5,
         weight: 9,
         abilities: [ 'rain-dish', 'torrent' ],
@@ -50,7 +50,7 @@ const staticPokemonRepository = (function(){
     {
         id: Math.random().toString(36),
         name: 'Charmander',
-        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg',
+        img: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
         height: 0.6,
         weight: 8.5,
         abilities: [ 'blaze', 'solar-power' ],
@@ -134,20 +134,14 @@ const staticPokemonRepository = (function(){
 
         listContainer.appendChild(card)
 
+        const colorThief = new ColorThief();
+
+        // Make sure image is finished loading to extract color
         image.addEventListener('load', function() {
-            var vibrant = new Vibrant(image);
-            var swatches = vibrant.swatches()
-            for (var swatch in swatches) {
-                if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
-                    console.log(swatch, swatches[swatch].getHex())
-                    if(swatch === 'Vibrant'){
-                        const color = swatches[swatch].getHex()
-                        console.log(color)
-                        card.style.backgroundImage =  `linear-gradient(0deg, ${color}, rgba(255, 255, 255))`
-                        card.style.border = `10px solid ${color}`
-                    }
-                }
-        }});
+            const color = colorThief.getColor(image);
+            card.style.backgroundImage =  `linear-gradient(0deg, rgb(${color}), rgba(255, 255, 255))`
+            card.style.border = `10px solid rgb(${color})`
+        });
 
         // addlisteners for delete and edit button
         deleteButtonListener(deleteButton)
