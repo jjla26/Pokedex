@@ -326,6 +326,7 @@ const staticPokemonRepository = (function(){
     // Action for adding a new pokemon after submitting form
     document.querySelector('.form__pokemon').onsubmit = e => {
         e.preventDefault()
+        const listContainer = document.querySelector('.pokemon__list')
         const id = document.getElementById('id').value
         const name = document.getElementById('name').value
         const img = document.getElementById('img').value
