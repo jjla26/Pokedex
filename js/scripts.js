@@ -91,7 +91,7 @@ window.onload = () => {
             const sended = staticPokemonRepository.add({name, img, height, weight, types, abilities})
             if(sended){
                 staticPokemonRepository.print(sended)
-                modal.hideModal()
+                customModal.hideModal()
             }
         }else{
             const pokemonEdited = staticPokemonRepository.edit(id,{name, img, height, weight, types, abilities})
@@ -105,7 +105,7 @@ window.onload = () => {
                         listContainer.replaceChild(newElement, element)
                     }
                 })
-                    .hideModal()
+                    customModal.hideModal()
             }
         }
     }
@@ -120,7 +120,7 @@ window.onload = () => {
         restoreButtonHeader.previousSibling.classList.add('hidden')
         restoreButtonSidebar.classList.remove('hidden')
         restoreButtonHeader.classList.remove('hidden')
-        modal.hideModal()
+        customModal.hideModal()
         filterPokemonForm.classList.add('hidden')
     }
 }

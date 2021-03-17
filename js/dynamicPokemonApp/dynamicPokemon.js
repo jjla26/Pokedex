@@ -211,7 +211,7 @@ const dynamicPokemonRepository = (function(){
             detailsContainer.appendChild(imageContainer)
             detailsContainer.appendChild(details)
 
-            modal.showModal("Pokemon Detail", detailsContainer)
+            customModal.showModal("Pokemon Detail", detailsContainer)
         })
     }
 
