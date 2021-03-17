@@ -5,7 +5,7 @@
     document.querySelector('.content__option').lastElementChild.addEventListener('click', () => {
         const pokemonContainer = document.querySelector('.content')
         const listContainer = document.querySelector('.pokemon__list')
-        const sidebarActions = document.querySelectorAll('.sidebar__item')
+        // const sidebarActions = document.querySelectorAll('.sidebar__item')
         const headerActions = document.querySelector('.content__header-actions')
         const appOptions = pokemonContainer.querySelector('.content__option')
         const appSelectionButtons = appOptions.querySelectorAll('button')
@@ -14,8 +14,8 @@
         pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
         staticPokemonRepository.renderStaticCount()
         listContainer.classList.remove('hidden')
-        sidebarActions[0].classList.remove('hidden')
-        sidebarActions[1].classList.remove('hidden')
+        // sidebarActions[0].classList.remove('hidden')
+        // sidebarActions[1].classList.remove('hidden')
         document.querySelector('#addPokemon').classList.remove('hidden')
         document.querySelector('.header__filter').classList.remove('hidden')
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
