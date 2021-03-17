@@ -64,8 +64,6 @@ li {
     border-radius: 10px;
     box-shadow: 0 0 10px black;
     color: black;
-    /* background-image: linear-gradient(135deg, rgba(226, 5, 255, 0.7), rgba(185, 163, 163, 0.5)); */
-    /* border: 10px solid rgb(255, 0, 157); */
     cursor: pointer;
 }
 
@@ -384,6 +382,13 @@ button:hover,
 
 .modal-content {
     background-color: var(--primary) !important;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
 
 .form__pokemon {
