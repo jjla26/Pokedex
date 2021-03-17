@@ -323,6 +323,54 @@ const staticPokemonRepository = (function(){
         filterByName(e.target.value)
     })
 
+    // Action for adding a new pokemon after submitting form
+    document.querySelector('.form__pokemon').onsubmit = e => {
+        e.preventDefault()
+        const id = document.getElementById('id').value
+        const name = document.getElementById('name').value
+        const img = document.getElementById('img').value
+        const height = parseFloat(document.getElementById('height').value)
+        const weight = parseFloat(document.getElementById('weight').value)
+        const types = document.getElementById('type').value.split(',')
+        const abilities = document.getElementById('abilities').value.split(',')
+        if(document.querySelector('.form__pokemon').querySelector('button').innerHTML === "Add a new Pokemon"){
+            const sended = add({name, img, height, weight, types, abilities})
+            if(sended){
+                staticPokemonRepository.print(sended)
+                customModal.hideModal()
+            }
+        }else{
+            const pokemonEdited = staticPokemonRepository.edit(id,{name, img, height, weight, types, abilities})
+            if(pokemonEdited){
+                const oldPokemon = pokemonEdited.oldPokemon
+                const newPokemon = pokemonEdited.newPokemon
+                print(newPokemon)
+                const newElement = listContainer.lastElementChild
+                document.querySelectorAll('.card').forEach(element => {
+                    if(element.querySelector('h3').innerText === oldPokemon.name){
+                        listContainer.replaceChild(newElement, element)
+                    }
+                })
+                    customModal.hideModal()
+            }
+        }
+    }
+    
+    // listener of the filter form
+    document.querySelector('.form__filter').onsubmit = e => {
+        e.preventDefault()
+        const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
+        const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
+        const name = document.getElementById('name__filter').value
+        staticPokemonRepository.filterByName(name)
+        filterPokemonButton.classList.add('hidden')
+        restoreButtonHeader.previousSibling.classList.add('hidden')
+        restoreButtonSidebar.classList.remove('hidden')
+        restoreButtonHeader.classList.remove('hidden')
+        customModal.hideModal()
+        document.querySelector('.form__filter').classList.add('hidden')
+    }
+
     return {
         getAll: getAll,
         add: add,
