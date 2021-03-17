@@ -78,8 +78,8 @@
                     </div>
                 </div>
                 <div class="content__pagination hidden">
-                    <button class="content__previous-button button" disabled role="navigation">Previous Page</button>
-                    <button class="content__next-button button" role="navigation">Next Page</button>
+                    <button class="content__previous-button btn" disabled role="navigation">Previous Page</button>
+                    <button class="content__next-button btn" role="navigation">Next Page</button>
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
             </div>
         </div> -->
 
-        <div class="modal" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -131,7 +131,7 @@
                 <input id="abilities" type="text" placeholder="Ex: jump, run" required>
             </div>
             <div class="input__group">
-                <button id="submit-form" type="submit">Add a New Pokemon</button>
+                <button id="submit-form" class="btn" type="submit">Add a New Pokemon</button>
             </div>
         </form>
 
@@ -141,12 +141,11 @@
                 <input id="name__filter" type="text" placeholder="Ex: Charmander" required>
             </div>
             <div class="input__group">
-                <button type="submit">Filter by Name</button>
+                <button type="submit" class="btn">Filter by Name</button>
             </div>
         </form>
 
     </main>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="js/utils/fetch-polyfill.js"></script>
