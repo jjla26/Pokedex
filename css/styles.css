@@ -215,6 +215,10 @@ li {
     width: 100%;
 }
 
+.content span {
+    margin: 20px;
+}
+
 .pokemon__container {
     display: flex;
     width: 100%;
