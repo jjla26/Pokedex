@@ -336,11 +336,11 @@ const staticPokemonRepository = (function(){
         if(document.querySelector('.form__pokemon').querySelector('button').innerHTML === "Add a new Pokemon"){
             const sended = add({name, img, height, weight, types, abilities})
             if(sended){
-                staticPokemonRepository.print(sended)
+                print(sended)
                 customModal.hideModal()
             }
         }else{
-            const pokemonEdited = staticPokemonRepository.edit(id,{name, img, height, weight, types, abilities})
+            const pokemonEdited = edit(id,{name, img, height, weight, types, abilities})
             if(pokemonEdited){
                 const oldPokemon = pokemonEdited.oldPokemon
                 const newPokemon = pokemonEdited.newPokemon
@@ -362,7 +362,7 @@ const staticPokemonRepository = (function(){
         const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
         const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
         const name = document.getElementById('name__filter').value
-        staticPokemonRepository.filterByName(name)
+        filterByName(name)
         filterPokemonButton.classList.add('hidden')
         restoreButtonHeader.previousSibling.classList.add('hidden')
         restoreButtonSidebar.classList.remove('hidden')
