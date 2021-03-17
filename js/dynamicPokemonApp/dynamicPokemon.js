@@ -136,23 +136,17 @@ const dynamicPokemonRepository = (function(){
         descriptionContainer.appendChild(abilities)
 
         cardListener(card, pokemon)
-        
-        image.addEventListener('load', function() {
-            console.log("asdad")
-            var vibrant = new Vibrant(image);
-            var swatches = vibrant.swatches()
-            for (var swatch in swatches) {
-                if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
-                    console.log(swatch, swatches[swatch].getHex())
-                    if(swatch === 'Vibrant'){
-                        const color = swatches[swatch].getHex()
-                        console.log(color)
-                        card.style.backgroundImage =  `linear-gradient(0deg, ${color}, rgba(255, 255, 255))`
-                        card.style.border = `10px solid ${color}`
-                    }
-                }
-        }});
 
+        const colorThief = new ColorThief();
+
+        // Make sure image is finished loading to extract color
+        image.addEventListener('load', function() {
+            const color = colorThief.getColor(image);
+            console.log(color)
+            card.style.backgroundImage =  `linear-gradient(0deg, rgb(${color}), rgba(255, 255, 255))`
+            card.style.border = `10px solid rgb(${color})`
+        });
+        
         listContainer.insertBefore(card, element.nextSibling)          
     }
 
@@ -239,7 +233,7 @@ const dynamicPokemonRepository = (function(){
         }else{
             loadDetails(pokemon, element)
                 .then(response => {
-                    pokemon.img = response.sprites.other.dream_world.front_default
+                    pokemon.img = response.sprites.other["official-artwork"].front_default
                     pokemon.height = response.height
                     pokemon.weight = response.weight
                     pokemon.types = response.types.map(type => type.type.name)
@@ -282,6 +276,39 @@ const dynamicPokemonRepository = (function(){
             return "Ups, this is not a pokemon"
         }
 
+    }
+
+    // Pagination next listener
+    let page = 0
+    const nextPageButton = document.querySelector('.content__next-button')
+    nextPageButton.onclick = () => {
+        page += 1
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        const nextPage = nextPage()
+        if(nextPage){
+            loadList(nextPage)
+                .then(() => {
+                    const pokemonList2 = getPokemonList2()
+                    printList(pokemonList2)
+                })
+        }else{
+            const list = [ ...document.querySelectorAll('.pokemon__item') ]
+            list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
+        }
+    }
+
+    // Pagination previous listener
+    const previousButton = document.querySelector('.content__previous-button')
+    previousButton.onclick = () => {
+        page -= 1
+        document.querySelectorAll('.pokemon__item').forEach(element => {
+            element.classList.add('hidden')
+        })
+        const list = [ ...document.querySelectorAll('.pokemon__item') ]
+        list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
+        previousPage()
     }
 
     return {

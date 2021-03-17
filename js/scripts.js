@@ -108,42 +108,6 @@ window.onload = () => {
         }
     }
 
-
-    // Pagination next listener
-    let page = 0
-    let offset = 5
-    const nextPageButton = document.querySelector('.content__next-button')
-    nextPageButton.onclick = () => {
-        page += 1
-        document.querySelectorAll('.pokemon__item').forEach(element => {
-            element.classList.add('hidden')
-        })
-        const nextPage = dynamicPokemonRepository.nextPage()
-        if(nextPage){
-            dynamicPokemonRepository
-            .loadList(nextPage)
-            .then(() => {
-                const pokemonList2 = dynamicPokemonRepository.getPokemonList2()
-                dynamicPokemonRepository.printList(pokemonList2)
-            })
-        }else{
-            const list = [ ...document.querySelectorAll('.pokemon__item') ]
-            list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
-        }
-    }
-
-    // Pagination previous listener
-    const previousButton = document.querySelector('.content__previous-button')
-    previousButton.onclick = () => {
-        page -= 1
-        document.querySelectorAll('.pokemon__item').forEach(element => {
-            element.classList.add('hidden')
-        })
-        const list = [ ...document.querySelectorAll('.pokemon__item') ]
-        list.slice(page*offset, page*offset+offset).forEach(element => element.classList.remove('hidden'))
-        dynamicPokemonRepository.previousPage()
-    }
-
     filterPokemonForm.onsubmit = e => {
         e.preventDefault()
         const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
