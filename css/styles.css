@@ -310,7 +310,7 @@ button:hover,
 
 /* styles for modal */
 
-.modal {
+/* .modal {
     position: fixed;
     padding: 20px;
     box-sizing: border-box;
@@ -358,6 +358,12 @@ button:hover,
     justify-content: center;
     align-items: center;
     margin: 10px;
+} */
+
+/* bootstrap modal */
+
+.modal-content {
+    background-color: var(--primary) !important;
 }
 
 .form__pokemon {
@@ -412,6 +418,7 @@ input:focus {
 
 .details__container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }

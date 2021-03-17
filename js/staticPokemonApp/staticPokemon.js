@@ -174,7 +174,7 @@ const staticPokemonRepository = (function(){
             document.getElementById('type').value = pokemon.types.join()
             document.getElementById('abilities').value = pokemon.abilities.join()
             pokemonForm.querySelector('button').innerText = "Edit Pokemon"
-            modal.showModal("Edit Pokemon", pokemonForm)
+            customModal.showModal("Edit Pokemon", pokemonForm)
         })  
     }
 
@@ -274,7 +274,7 @@ const staticPokemonRepository = (function(){
         document.querySelectorAll('input').forEach(el => el.value = '')
         pokemonForm.classList.remove('hidden')
         pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
-        modal.showModal('Add a new Pokemon', pokemonForm)
+        customModal.showModal('Add a new Pokemon', pokemonForm)
     }
 
     // Function that shows a filter modal
@@ -285,7 +285,7 @@ const staticPokemonRepository = (function(){
         pokemonContainer.appendChild(pokemonForm)
         const filterPokemonForm = document.querySelector('.form__filter')
         filterPokemonForm.classList.remove('hidden')
-        modal.showModal('Filter Pokemon By Name', filterPokemonForm)
+        customModal.showModal('Filter Pokemon By Name', filterPokemonForm)
     }
 
     //function that restore the pokemon list after filtered

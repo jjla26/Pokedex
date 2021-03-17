@@ -100,6 +100,8 @@ const dynamicPokemonRepository = (function(){
 
         const card = document.createElement('div')
         card.classList.add('card', ...pokemon.types) 
+        card.setAttribute('data-bs-toggle', 'modal')
+        card.setAttribute('data-bs-target', '#modal')
 
         const imageContainer = document.createElement('div')
         imageContainer.classList.add('card__image-container')
