@@ -235,7 +235,7 @@ li {
 .pokemon__section {
     display: flex;
     flex-direction: row;
-    min-height: 100vh;
+    min-height: calc(100vh - 66px);
 }
 
 .content__option {
