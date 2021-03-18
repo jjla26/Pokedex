@@ -9,7 +9,7 @@ const dynamicPokemonRepository = (function(){
     let totalItems
 
     // function to get all the pokemonList
-    function getpokemonList(){
+    function getPokemonList(){
         return pokemonList.slice(offset, offset+step)
     }
 
@@ -35,7 +35,7 @@ const dynamicPokemonRepository = (function(){
             nextButton.disabled = true
             loadList(nextPageUrl)
             .then(() => {
-                const pokemonList = getpokemonList()
+                const pokemonList = getPokemonList()
                 printList(pokemonList)
             })
         }else{
@@ -171,7 +171,7 @@ const dynamicPokemonRepository = (function(){
         listContainer.insertBefore(card, element.nextSibling)          
     }
 
-    // function that prints the pokemonList
+    // function that prints the pokemonlist
     function printList(pokemonList){
         const listContainer = document.querySelector('.pokemon__dynamic-list')
         const list = document.createElement('ul')
@@ -307,7 +307,7 @@ const dynamicPokemonRepository = (function(){
 
     return {
         loadList: loadList,
-        getpokemonList: getpokemonList,
+        getPokemonList: getPokemonList,
         addDynamicList: addDynamicList,
         printList: printList,
         printCard: printCard,
