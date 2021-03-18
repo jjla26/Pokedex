@@ -30,7 +30,7 @@
         dynamicPokemonRepository
             .loadList()
             .then(() => {
-                const pokemonList = dynamicPokemonRepository.getPokemonList2()
+                const pokemonList = dynamicPokemonRepository.getPokemonList()
                 dynamicPokemonRepository.printList(pokemonList)
                 dynamicPokemonRepository.renderDynamicCount()
             })

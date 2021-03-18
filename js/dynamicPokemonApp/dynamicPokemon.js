@@ -1,6 +1,6 @@
 const dynamicPokemonRepository = (function(){
     
-    let pokemonList2 = []
+    let pokemonList = []
     let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5'
     let nextPageUrl = ''
     let page = 0
@@ -8,9 +8,9 @@ const dynamicPokemonRepository = (function(){
     let step = 5
     let totalItems
 
-    // function to get all the pokemonList2
-    function getPokemonList2(){
-        return pokemonList2.slice(offset, offset+step)
+    // function to get all the pokemonList
+    function getpokemonList(){
+        return pokemonList.slice(offset, offset+step)
     }
 
     function renderDynamicCount(){
@@ -30,13 +30,13 @@ const dynamicPokemonRepository = (function(){
         })
         document.querySelector('.content__previous-button').disabled = false
         const nextButton = document.querySelector('.content__next-button')
-        const nextList = pokemonList2.slice(offset, offset+step)
+        const nextList = pokemonList.slice(offset, offset+step)
         if(nextList.length === 0){
             nextButton.disabled = true
             loadList(nextPageUrl)
             .then(() => {
-                const pokemonList2 = getPokemonList2()
-                printList(pokemonList2)
+                const pokemonList = getpokemonList()
+                printList(pokemonList)
             })
         }else{
             const list = [ ...document.querySelectorAll('.pokemon__item') ]
@@ -109,8 +109,8 @@ const dynamicPokemonRepository = (function(){
     function addDynamicList(pokemon){
         const validation = nameValidation(pokemon)
         if(!validation){
-            const newList = pokemonList2.concat(pokemon)
-            pokemonList2 = newList
+            const newList = pokemonList.concat(pokemon)
+            pokemonList = newList
         }
     }
 
@@ -171,7 +171,7 @@ const dynamicPokemonRepository = (function(){
         listContainer.insertBefore(card, element.nextSibling)          
     }
 
-    // function that prints the pokemonlist2
+    // function that prints the pokemonList
     function printList(pokemonList){
         const listContainer = document.querySelector('.pokemon__dynamic-list')
         const list = document.createElement('ul')
@@ -307,7 +307,7 @@ const dynamicPokemonRepository = (function(){
 
     return {
         loadList: loadList,
-        getPokemonList2: getPokemonList2,
+        getpokemonList: getpokemonList,
         addDynamicList: addDynamicList,
         printList: printList,
         printCard: printCard,
