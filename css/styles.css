@@ -158,10 +158,6 @@ li {
     align-items: center;
 }
 
-.content__header-actions {
-    display: none;
-}
-
 .pokemon__dynamic-list {
     flex-grow: 1;
     display: flex;
@@ -312,10 +308,6 @@ input:focus {
 /* small devices styles */
 
 @media only screen and (max-width: 768px) {
-    .content__header-actions {
-        display: flex;
-    }
-
     .details__container {
         flex-direction: column;
     }

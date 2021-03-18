@@ -48,14 +48,16 @@
                     <div class="content__header-container">
                         <div class="content__header">
                             <h2>Choose the app you want to visit</h2>
-                            <div class="content__header-actions"></div>
                         </div>
                     </div>
+                    
                     <span class="hidden"></span>
+
                     <div class="content__option">
                         <button class="btn">Dynamic Pokemon App</button>
                         <button class="btn">Static CRUD Pokemon App</button>
                     </div>
+
                     <div class="pokemon__container">
                         <div class="pokemon__dynamic-list hidden">
                             <div class="spinner hidden"></div>
@@ -63,6 +65,7 @@
                         <div class="pokemon__list hidden">
                         </div>
                     </div>
+
                     <div class="content__pagination hidden">
                         <button class="content__previous-button btn" disabled role="navigation">Previous Page</button>
                         <button class="content__next-button btn" role="navigation">Next Page</button>
@@ -82,6 +85,7 @@
                 </div>
             </div>
 
+            <!-- Pokemon Adding and Editing pokemon in the static data app -->
             <form class="form__pokemon hidden">
                 <input id="id" type="text">
                 <div class="input__group">
@@ -110,16 +114,6 @@
                 </div>
                 <div class="input__group">
                     <button id="submit-form" class="btn" type="submit">Add a New Pokemon</button>
-                </div>
-            </form>
-
-            <form class="form__filter hidden">
-                <div class="input__group">
-                    <label for="name__filter">Name</label>
-                    <input id="name__filter" type="text" placeholder="Ex: Charmander" required>
-                </div>
-                <div class="input__group">
-                    <button type="submit" class="btn">Filter by Name</button>
                 </div>
             </form>
 
