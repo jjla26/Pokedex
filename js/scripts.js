@@ -1,11 +1,10 @@
 (function(){
 
-    // Building the static pokemon app when click in static App
+    // Building the static data pokemon app when click in static App
 
     document.querySelector('.content__option').lastElementChild.addEventListener('click', () => {
         const pokemonContainer = document.querySelector('.content')
         const listContainer = document.querySelector('.pokemon__list')
-        // const sidebarActions = document.querySelectorAll('.sidebar__item')
         const headerActions = document.querySelector('.content__header-actions')
         const appOptions = pokemonContainer.querySelector('.content__option')
         const appSelectionButtons = appOptions.querySelectorAll('button')
@@ -14,8 +13,6 @@
         pokemonList.forEach(pokemon => staticPokemonRepository.print(pokemon))
         staticPokemonRepository.renderStaticCount()
         listContainer.classList.remove('hidden')
-        // sidebarActions[0].classList.remove('hidden')
-        // sidebarActions[1].classList.remove('hidden')
         document.querySelector('#addPokemon').classList.remove('hidden')
         document.querySelector('.header__filter').classList.remove('hidden')
         pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
@@ -49,7 +46,7 @@
     })
 
 
-    // Event listener to build the dynamic pokemon app
+    // Event listener to build the dynamic data pokemon app
 
     document.querySelector('.content__option').firstElementChild.addEventListener('click', () => {
         const dynamicListContainer = document.querySelector('.pokemon__dynamic-list')

@@ -290,33 +290,9 @@ const staticPokemonRepository = (function(){
         customModal.showModal('Filter Pokemon By Name', filterPokemonForm)
     }
 
-    //function that restore the pokemon list after filtered
-    // function restoreButtonAction(){
-    //     const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
-    //     const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
-    //     restoreButtonHeader.classList.add('hidden')
-    //     restoreButtonSidebar.classList.add('hidden')
-    //     restoreButtonSidebar.previousElementSibling.classList.remove('hidden')
-    //     restoreButtonHeader.previousElementSibling.classList.remove('hidden')
-    //     restoreList()
-    // }
-
-    // Add buttons listeners
-    // document.querySelector('.sidebar__list').firstElementChild.addEventListener('click', () => {
-    //     addButtonAction()
-    // })
-
     document.querySelector('#addPokemon').addEventListener('click', () => {
         addButtonAction()
     })
-
-    // Action that shows a filter pokemon form
-    // document.querySelector('.sidebar__list').firstElementChild.nextElementSibling.addEventListener('click', () => {
-    //     filterButtonAction()
-    // })
-
-    // Action that restore the list of pokemon
-    // document.querySelector('.sidebar__list').lastElementChild.addEventListener('click', restoreButtonAction)
 
     // Action to filter pokemon by name 
     document.querySelector('.header__filter').addEventListener('input', e => {
@@ -356,21 +332,6 @@ const staticPokemonRepository = (function(){
             }
         }
     }
-    
-    // listener of the filter form
-    // document.querySelector('.form__filter').onsubmit = e => {
-    //     e.preventDefault()
-    //     const restoreButtonSidebar = document.querySelector('.sidebar__list').lastElementChild
-    //     const restoreButtonHeader = document.querySelector('.content__header-actions').lastElementChild
-    //     const name = document.getElementById('name__filter').value
-    //     filterByName(name)
-    //     filterPokemonButton.classList.add('hidden')
-    //     restoreButtonHeader.previousSibling.classList.add('hidden')
-    //     restoreButtonSidebar.classList.remove('hidden')
-    //     restoreButtonHeader.classList.remove('hidden')
-    //     customModal.hideModal()
-    //     document.querySelector('.form__filter').classList.add('hidden')
-    // }
 
     return {
         getAll: getAll,
@@ -383,6 +344,5 @@ const staticPokemonRepository = (function(){
         renderStaticCount: renderStaticCount,
         addButtonAction: addButtonAction,
         filterButtonAction: filterButtonAction,
-        // restoreButtonAction: restoreButtonAction
     }
 })()

@@ -133,35 +133,6 @@ li {
     outline: 0;
 }
 
-/* Cards colors per type */
-
-/* .fire {
-    background-image: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 255, 0, 0.5));
-    border: 8px solid rgba(255, 0, 0);
-}
-
-.water {
-    background-image: linear-gradient(135deg, rgba(0, 0, 255, 0.7), rgba(0, 255, 255, 0.5));
-    border: 10px solid rgba(0, 0, 255);
-}
-
-.flying {
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(145, 145, 248, 0.5));
-    border: 10px solid rgba(255, 255, 255);
-}
-
-.grass {
-    background-image: linear-gradient(135deg, rgba(5, 80, 5, 0.7), rgba(67, 214, 38, 0.5));
-    border: 10px solid rgba(5, 80, 5);
-}
-
-.electric {
-    background-image: linear-gradient(135deg, rgba(255, 255, 5, 0.7), rgba(0, 0, 0, 0.5));
-    border: 10px solid rgb(255, 255, 0);
-} */
-
-/* styles of the pokemon panel */
-
 .pokemon__list {
     flex-grow: 1;
     display: flex;
@@ -243,77 +214,6 @@ li {
     align-items: center;
 }
 
-/* styles of the sidebar sidebar */
-
-.sidebar__image {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
-
-.sidebar__header {
-    border-bottom: 1px solid var(--primary);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.sidebar__list-container {
-    width: 100%;
-    display: flex;
-}
-
-.sidebar__list {
-    width: 100%;
-    padding: 0;
-}
-
-.sidebar__item {
-    cursor: pointer;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 20px;
-}
-
-.sidebar__item:hover {
-    background-color: var(--primary);
-    width: 100%;
-}
-
-.sidebar__container {
-    display: flex;
-    width: 300px;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--primary-darker);
-    border-right: 1px solid var(--primary);
-    box-shadow: 0 0 2px black;
-}
-
-/* button,
-.button {
-    border: 1px solid var(--primary-darker);
-    border-radius: 5px;
-    height: 50px;
-    cursor: pointer;
-    width: 100%;
-    background-color: var(--secondary);
-    color: var(--primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2px;
-}
-
-button:hover,
-.button:hover {
-    background-color: var(--secondary-darker);
-} */
-
 button,
 .button {
     border: 1px solid var(--primary-darker) !important;
@@ -325,60 +225,6 @@ button:hover,
 .button:hover {
     background-color: var(--secondary-darker) !important;
 }
-
-/* styles for modal */
-
-/* .modal {
-    position: fixed;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    overflow: auto;
-    display: grid;
-}
-
-.modal__content {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    background-color: var(--primary);
-    border: 1px solid var(--primary-darker);
-    padding: 15px;
-    width: 100%;
-    text-align: left;
-}
-
-.modal__close {
-    color: var(--secondary);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.modal__title {
-    text-align: center;
-}
-
-.modal__close:hover,
-.modal__close:focus {
-    color: var(--secondary-darker);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal__body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-} */
-
-/* bootstrap modal */
 
 .modal-content {
     background-color: var(--primary) !important;
@@ -466,10 +312,6 @@ input:focus {
 /* small devices styles */
 
 @media only screen and (max-width: 768px) {
-    .sidebar__container {
-        display: none;
-    }
-
     .content__header-actions {
         display: flex;
     }
