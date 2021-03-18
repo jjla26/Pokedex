@@ -182,29 +182,13 @@ const staticPokemonRepository = (function(){
         const validation = pokemonValidate(pokemonEdited)
         if(!validation){
             const newPokemon = {id, ...pokemonEdited}
-            if(pokemonList.find(pokemon => pokemon.id === id )){
-                const oldPokemon = pokemonList.find(pokemon => pokemon.id === id )
-                const newPokemonList = pokemonList.map(pokemon => {
-                    if(pokemon.id === id){
-                        return newPokemon
-                    }else{
-                        return pokemon
-                    }
-                })
-                pokemonList = newPokemonList
-                return { newPokemon, oldPokemon }
-            }else{
-                const oldPokemon = pokemonList2.find(pokemon => pokemon.id === id )
-                const newPokemonList = pokemonList2.map(pokemon => {
-                    if(pokemon.id === id){
-                        return newPokemon
-                    }else{
-                        return pokemon
-                    }
-                })
-                pokemonList = newPokemonList
-                return { newPokemon, oldPokemon } 
-            }
+            const oldPokemon = pokemonList.find(pokemon => pokemon.id === id )
+            const newPokemonList = pokemonList.map(pokemon => {
+                if(pokemon.id === id) return newPokemon
+                else return pokemon
+            })
+            pokemonList = newPokemonList
+            return { newPokemon, oldPokemon }
         }else{
             alert(validation)
             return false
