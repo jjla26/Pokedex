@@ -1,11 +1,11 @@
 const dynamicPokemonRepository = (function(){
     
     let pokemonList = []
-    let mainUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=5'
+    let step = 5
+    let mainUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${step}`
     let nextPageUrl = ''
     let page = 0
     let offset = 0
-    let step = 5
     let totalItems
 
     // function to get all the pokemonList
