@@ -164,10 +164,7 @@ const staticPokemonRepository = (function(){
         element.addEventListener('click', () => {
             const pokemonContainer = document.querySelector('.pokemon__section')
             const pokemonForm = document.querySelector('.form__pokemon')
-            const filterPokemonForm = document.querySelector('.form__filter')
             pokemonForm.classList.remove('hidden')
-            filterPokemonForm.classList.add('hidden')
-            pokemonContainer.appendChild(filterPokemonForm)    
             document.getElementById('id').value = pokemon.id
             document.getElementById('name').value = pokemon.name
             document.getElementById('img').value = pokemon.img
@@ -269,25 +266,11 @@ const staticPokemonRepository = (function(){
     // Function that shows a modal to add a pokemon
     function addButtonAction(){
         const pokemonContainer = document.querySelector('.pokemon__section')
-        const filterPokemonForm = document.querySelector('.form__filter')
         const pokemonForm = document.querySelector('.form__pokemon')
-        filterPokemonForm.classList.add('hidden')
-        pokemonContainer.appendChild(filterPokemonForm)
         document.querySelectorAll('input').forEach(el => el.value = '')
         pokemonForm.classList.remove('hidden')
         pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
         customModal.showModal('Add a new Pokemon', pokemonForm)
-    }
-
-    // Function that shows a filter modal
-    function filterButtonAction(){
-        const pokemonContainer = document.querySelector('.pokemon__section')
-        const pokemonForm = document.querySelector('.form__pokemon')
-        pokemonForm.classList.add('hidden')
-        pokemonContainer.appendChild(pokemonForm)
-        const filterPokemonForm = document.querySelector('.form__filter')
-        filterPokemonForm.classList.remove('hidden')
-        customModal.showModal('Filter Pokemon By Name', filterPokemonForm)
     }
 
     document.querySelector('#addPokemon').addEventListener('click', () => {
@@ -343,6 +326,5 @@ const staticPokemonRepository = (function(){
         filterByName: filterByName,
         renderStaticCount: renderStaticCount,
         addButtonAction: addButtonAction,
-        filterButtonAction: filterButtonAction,
     }
 })()
