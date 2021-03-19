@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const dynamicPokemonRepository = (function(){
     
     let pokemonList = []
@@ -86,7 +87,6 @@ const dynamicPokemonRepository = (function(){
                 }
                 if(response.previous){
                     previousButton.disabled = false
-                    previousPageUrl = response.previous
                 }else{
                     previousButton.disabled = true
                 }
@@ -101,7 +101,8 @@ const dynamicPokemonRepository = (function(){
                     document.querySelector('.content__pagination').classList.remove('hidden')
                 })
             })
-            .catch(error => {
+            .catch((error) => {
+                console.log(error)
                 container.querySelector('.spinner').classList.remove('hidden')
             })
     }
@@ -231,13 +232,13 @@ const dynamicPokemonRepository = (function(){
             detailsContainer.appendChild(imageContainer)
             detailsContainer.appendChild(details)
 
-            customModal.showModal("Pokemon Detail", detailsContainer)
+            customModal.showModal('Pokemon Detail', detailsContainer)
         })
     }
 
     //function to add event listener for pokemon detail
     function detailListener(element, pokemon){
-        element.addEventListener('click', e => {
+        element.addEventListener('click', () => {
             showDetails(pokemon, element)
         })
     }
@@ -254,7 +255,7 @@ const dynamicPokemonRepository = (function(){
         }else{
             loadDetails(pokemon, element)
                 .then(response => {
-                    pokemon.img = response.sprites.other["official-artwork"].front_default
+                    pokemon.img = response.sprites.other['official-artwork'].front_default
                     pokemon.height = response.height
                     pokemon.weight = response.weight
                     pokemon.types = response.types.map(type => type.type.name)
@@ -278,7 +279,7 @@ const dynamicPokemonRepository = (function(){
                 spinnerContainer.appendChild(spinner)
                 return response
             })
-            .catch(error => {
+            .catch(() => {
                 spinner.classList.add('hidden')
                 spinnerContainer.appendChild(spinner)            
             })
@@ -294,7 +295,7 @@ const dynamicPokemonRepository = (function(){
                 return null
             }
         }else{
-            return "Ups, this is not a pokemon"
+            return 'Ups, this is not a pokemon'
         }
 
     }

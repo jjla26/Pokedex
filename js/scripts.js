@@ -14,11 +14,10 @@
         listContainer.classList.remove('hidden')
         document.querySelector('#addPokemon').classList.remove('hidden')
         document.querySelector('.header__filter').classList.remove('hidden')
-        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+        pokemonContainer.querySelector('h2').innerText = 'Your Pokemons'
 
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     })
-
 
     // Event listener to build the dynamic data pokemon app
 
@@ -34,7 +33,7 @@
                 dynamicPokemonRepository.printList(pokemonList)
                 dynamicPokemonRepository.renderDynamicCount()
             })
-        pokemonContainer.querySelector('h2').innerText = "Your Pokemons"
+        pokemonContainer.querySelector('h2').innerText = 'Your Pokemons'
         dynamicListContainer.classList.remove('hidden')
         appSelectionButtons.forEach(element => element.classList.add('hidden'))
     })

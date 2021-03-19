@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const staticPokemonRepository = (function(){
     
     //list of pokemon
@@ -84,7 +85,7 @@ const staticPokemonRepository = (function(){
         card.classList.add('card', ...pokemon.types) 
         
         const action = document.createElement('div')
-        action.classList.add(`card__action`) 
+        action.classList.add('card__action') 
         card.appendChild(action)
 
         const deleteButton = document.createElement('button')
@@ -162,7 +163,6 @@ const staticPokemonRepository = (function(){
     //function to add event listener to edit button
     function editButtonListener(element, pokemon){
         element.addEventListener('click', () => {
-            const pokemonContainer = document.querySelector('.pokemon__section')
             const pokemonForm = document.querySelector('.form__pokemon')
             pokemonForm.classList.remove('hidden')
             document.getElementById('id').value = pokemon.id
@@ -172,8 +172,8 @@ const staticPokemonRepository = (function(){
             document.getElementById('weight').value = pokemon.weight
             document.getElementById('type').value = pokemon.types.join()
             document.getElementById('abilities').value = pokemon.abilities.join()
-            pokemonForm.querySelector('button').innerText = "Edit Pokemon"
-            customModal.showModal("Edit Pokemon", pokemonForm)
+            pokemonForm.querySelector('button').innerText = 'Edit Pokemon'
+            customModal.showModal('Edit Pokemon', pokemonForm)
         })  
     }
 
@@ -243,17 +243,16 @@ const staticPokemonRepository = (function(){
                 return null
             }
         }else{
-            return "Ups, this is not a pokemon"
+            return 'Ups, this is not a pokemon'
         }  
     }
 
     // Function that shows a modal to add a pokemon
     function addButtonAction(){
-        const pokemonContainer = document.querySelector('.pokemon__section')
         const pokemonForm = document.querySelector('.form__pokemon')
         document.querySelectorAll('input').forEach(el => el.value = '')
         pokemonForm.classList.remove('hidden')
-        pokemonForm.querySelector('button').innerText = "Add a new Pokemon"
+        pokemonForm.querySelector('button').innerText = 'Add a new Pokemon'
         customModal.showModal('Add a new Pokemon', pokemonForm)
     }
 
@@ -277,7 +276,7 @@ const staticPokemonRepository = (function(){
         const weight = parseFloat(document.getElementById('weight').value)
         const types = document.getElementById('type').value.split(',')
         const abilities = document.getElementById('abilities').value.split(',')
-        if(document.querySelector('.form__pokemon').querySelector('button').innerHTML === "Add a new Pokemon"){
+        if(document.querySelector('.form__pokemon').querySelector('button').innerHTML === 'Add a new Pokemon'){
             const sended = add({name, img, height, weight, types, abilities})
             if(sended){
                 print(sended)

@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const customModal = (function(){
 
     // function to show the modal
