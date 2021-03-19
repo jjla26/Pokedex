@@ -325,4 +325,8 @@ input:focus {
     .pokemon__dynamic-list {
         width: 100%;
     }
+
+    .content__option {
+        flex-direction: column;
+    }
 }
